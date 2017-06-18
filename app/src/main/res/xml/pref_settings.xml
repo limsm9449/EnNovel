@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference
+        android:defaultValue="17"
+        android:key="key_fontSize"
+        android:title="폰트 사이즈"
+        android:entries="@array/fontSizeName"
+        android:entryValues="@array/fontSize"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"/>
+
+    <PreferenceCategory android:title="백업 / 복구">
+        <Preference
+            android:key="key_backup"
+            android:title="백업"
+            android:summary="단어장 데이타를 ennovel 디렉토리에 백업합니다."/>
+        <Preference
+            android:key="key_recovery"
+            android:title="복구"
+            android:summary="ennovel 디렉토리에서 단어장 데이타를 복구합니다."/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="초기화">
+        <Preference
+            android:key="key_voc_clear"
+            android:title="단어장 초기화"
+            android:summary="모든 단어장을 삭제합니다."/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="개발자">
+        <Preference
+            android:key="key_mail"
+            android:title="개발자 메일 보내기"
+            android:summary="어플 관련 메일을 보내주세요."/>
+        <Preference
+            android:key="key_review"
+            android:title="어플 리뷰"
+            android:summary="어플 관련 리뷰를 달아주세요."/>
+        <Preference
+            android:key="key_apps"
+            android:title="기타 어플.."
+            android:summary="다른 학습 어플을 확인해 보세요."/>
+    </PreferenceCategory>
+</PreferenceScreen>

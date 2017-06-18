@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="5dp"
+    android:paddingTop="8dp"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingBottom="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/my_rl_left"
+        android:gravity="center_vertical|center_horizontal">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_cb_check"
+            android:button="@android:drawable/checkbox_off_background"
+            android:textSize="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="false"
+            android:textAlignment="center"
+            android:gravity="start" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/my_rl_left">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_c_pi_ll"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Word"
+                android:id="@+id/my_tv_word"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/my_text_word"
+                android:textSize="15dp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spelling"
+                android:id="@+id/my_tv_spelling"
+                android:textSize="13dp"
+                android:layout_toRightOf="@+id/my_tv_word"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/my_tv_date"
+                android:textColor="#FF9E9C9C" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:id="@+id/my_tv_date"
+                android:textSize="11dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentRight="true"
+                android:textColor="#FF9E9C9C"
+                android:layout_marginRight="10dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_c_vi_ll_2"
+            android:layout_below="@+id/my_c_pi_ll"
+            android:gravity="center"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mean"
+                android:id="@+id/my_tv_mean"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="false"
+                android:textColor="@color/my_text_mean"
+                android:textSize="13dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignWithParentIfMissing="false"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|left"
+                android:layout_toLeftOf="@+id/my_cb_memory_check" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_cb_memory_check"
+                android:layout_alignParentRight="true"
+                android:button="@drawable/my_checkbox_img"
+                android:textSize="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sleepingbear.ehdictandvoc.MainActivity">
+    <item android:id="@+id/action_edit" android:title="@string/action_edit"
+        android:orderInCategory="100" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_edit_white_24dp"/>
+    <item android:id="@+id/action_exit" android:title="@string/action_exit"
+        android:orderInCategory="200" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_exit_to_app_white_24dp"/>
+    <item android:id="@+id/action_help" android:title="@string/action_help"
+        android:orderInCategory="300" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_help_outline_white_24dp"/>
+</menu>

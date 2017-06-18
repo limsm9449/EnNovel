@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="8dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout3"
+            android:layout_alignParentTop="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/relativeLayout4">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/my_tv_question"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="false"
+                android:textColor="@color/my_text_word"
+                android:textSize="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentBottom="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/my_tv_answer"
+                android:layout_alignParentRight="false"
+                android:textColor="#4f8ead"
+                android:textSize="13dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/my_tv_question" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout4"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|center_horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_cb_memorization"
+                android:button="@drawable/my_checkbox_img"
+                android:textSize="10dp"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical|center_horizontal" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

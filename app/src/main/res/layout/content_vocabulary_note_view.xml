@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_vocabulary_note_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sleepingbear.ennovel.VocabularyNoteViewActivity"
+    tools:showIn="@layout/activity_vocabulary_note_view">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/adView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_c_rl_condi">
+
+            <RadioGroup
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:checkedButton="@+id/my_a_voc_rb_all"
+                android:id="@+id/my_a_voc_rg_memory"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal"
+                android:background="@drawable/my_toggle_outline">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="All"
+                    android:id="@+id/my_a_voc_rb_all"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="@drawable/my_toggle_bg"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="1dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/my_white"
+                    android:checked="true"
+                    android:layout_marginRight="1dp" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="암기"
+                    android:id="@+id/my_a_voc_rb_m"
+                    android:background="@drawable/my_toggle_bg"
+                    android:layout_weight="1.5"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/my_white" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="미암기"
+                    android:id="@+id/my_a_voc_rb_m_not"
+                    android:background="@drawable/my_toggle_bg"
+                    android:layout_weight="2"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/my_white" />
+            </RadioGroup>
+
+            <Spinner
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:id="@+id/my_a_voc_s_ord"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="false"
+                android:layout_toRightOf="@+id/my_a_voc_rg_memory"
+                android:layout_marginLeft="5dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:id="@+id/my_c_rl_tool"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_done_all_black_24dp"
+                android:id="@+id/my_iv_all"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_delete_black_24dp"
+                android:id="@+id/my_iv_delete"
+                android:layout_toRightOf="@+id/my_iv_all"
+                android:layout_marginLeft="10dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_content_copy_black_24dp"
+                android:id="@+id/my_iv_copy"
+                android:layout_marginLeft="20dp"
+                android:layout_toLeftOf="@+id/my_iv_move" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_content_cut_black_24dp"
+                android:id="@+id/my_iv_move"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/my_divider"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/my_a_cat_lv_category"
+            android:layout_marginTop="5dp"></LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/my_lv_list"
+            android:layout_gravity="center_horizontal"
+            android:divider="@color/my_divider"
+            android:dividerHeight="0.5dp"
+            android:layout_alignParentBottom="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/my_divider"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/my_a_cat_lv_category" />
+
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

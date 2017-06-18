@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sleepingbear.ennovel.Study5Activity"
+    tools:showIn="@layout/activity_study5">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout8" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" >
+
+                <RadioGroup
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:checkedButton="@+id/my_a_study5_rb_all"
+                    android:id="@+id/my_a_study5_rg"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/my_toggle_outline"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentLeft="true" >
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="All"
+                        android:id="@+id/my_a_study5_rb_all"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white"
+                        android:checked="true"
+                        android:layout_marginRight="1dp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="암기"
+                        android:id="@+id/my_a_study5_rb_m"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="1.5"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="미암기"
+                        android:id="@+id/my_a_study5_rb_m_not"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="2"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:checkedButton="@+id/my_a_study5_rb_word"
+                    android:id="@+id/my_a_study5_rg2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/my_toggle_outline"
+                    android:layout_toRightOf="@+id/my_a_study5_rg" >
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="단어"
+                        android:id="@+id/my_a_study5_rb_word"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="1"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white"
+                        android:layout_marginLeft="1dp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="뜻"
+                        android:id="@+id/my_a_study5_rb_mean"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="1"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white" />
+                </RadioGroup>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Random"
+                    android:id="@+id/my_a_study5_b_random"
+                    android:layout_alignParentTop="false"
+                    android:background="@drawable/my_button"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/my_divider"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout8"
+        android:layout_above="@+id/adView">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/my_a_study5_tv_question"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/my_text_word"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/my_a_study5_tv_spelling"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:layout_below="@+id/my_a_study5_tv_question"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/my_text_spelling"
+                    android:textSize="19dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/my_a_study5_tv_spelling"
+                    android:layout_above="@+id/my_a_study5_tv_orgAnswer"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/my_a_study5_tv_answer1"
+                        android:gravity="left|center"
+                        android:textColor="@color/my_text_mean"
+                        android:textSize="16dp"
+                        android:singleLine="false"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/my_a_study5_tv_answer2"
+                        android:gravity="left|center"
+                        android:textColor="@color/my_text_mean"
+                        android:textSize="16dp"
+                        android:singleLine="false"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/my_a_study5_tv_answer3"
+                        android:gravity="left|center"
+                        android:textColor="@color/my_text_mean"
+                        android:textSize="16dp"
+                        android:singleLine="false"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/my_a_study5_tv_answer4"
+                        android:gravity="left|center"
+                        android:textColor="@color/my_text_mean"
+                        android:textSize="16dp"
+                        android:singleLine="false"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="O"
+                    android:id="@+id/my_a_study5_tv_ox"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textSize="100dp"
+                    android:textColor="#de6c6c" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="O"
+                    android:id="@+id/my_a_study5_tv_orgAnswer"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textSize="15dp"
+                    android:textColor="#de6c6c"
+                    android:layout_above="@+id/my_a_study5_ll_1"
+                    android:layout_marginBottom="20dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/my_a_study5_ll_1"
+                    android:layout_alignParentBottom="false"
+                    android:layout_above="@+id/my_a_study5_ll_2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/my_a_study5_tv_o_cnt"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/my_a_study5_tv_x_cnt"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/my_a_study5_ll_2" >
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="1"
+                        android:id="@+id/my_a_study5_b_a1"
+                        android:layout_alignParentTop="false"
+                        android:background="@drawable/my_button"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@android:color/white"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="25dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="2"
+                        android:id="@+id/my_a_study5_b_a2"
+                        android:layout_alignParentTop="false"
+                        android:background="@drawable/my_button"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@android:color/white"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="25dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="3"
+                        android:id="@+id/my_a_study5_b_a3"
+                        android:layout_alignParentTop="false"
+                        android:background="@drawable/my_button"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@android:color/white"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="25dp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="4"
+                        android:id="@+id/my_a_study5_b_a4"
+                        android:layout_alignParentTop="false"
+                        android:background="@drawable/my_button"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@android:color/white"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="25dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/my_divider"
+            android:layout_marginTop="5dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <SeekBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_a_study5_sb"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/my_a_study5_tv_pos" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:id="@+id/my_a_study5_tv_pos"
+                    android:layout_toLeftOf="@+id/textView15"
+                    android:layout_centerInParent="true"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:id="@+id/textView15"
+                    android:layout_toLeftOf="@+id/my_a_study5_tv_total"
+                    android:layout_centerInParent="true"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    android:id="@+id/my_a_study5_tv_total"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerInParent="true"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp" >
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_a_study5_ib_first"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/ic_media_rew"
+                    android:background="@android:color/transparent"
+                    android:longClickable="false" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_a_study5_ib_prev"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/ic_media_previous"
+                    android:background="@android:color/transparent" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_a_study5_ib_next"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/ic_media_next"
+                    android:background="@android:color/transparent" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_a_study5_ib_last"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/ic_media_ff"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

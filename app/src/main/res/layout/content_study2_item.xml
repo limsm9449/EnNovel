@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingTop="8dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="8dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/my_c_s2i_rl_1"
+            android:layout_toLeftOf="@+id/my_c_s2i_rl_2">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayout3"
+                android:layout_alignParentTop="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/my_c_s2i_tv_question"
+                    android:textColor="@color/my_text_word"
+                    android:textSize="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/my_c_s2i_tv_answer" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/my_c_s2i_tv_answer"
+                    android:textColor="@color/my_text_question"
+                    android:textSize="13dp"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true" />
+
+            </RelativeLayout>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/relativeLayout3"
+                android:id="@+id/my_c_s2i_rg">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_c_s2i_rb_answer1"
+                    android:textColor="@color/my_text_answer"
+                    android:text="answer1"
+                    android:buttonTint="#5d2626" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_c_s2i_rb_answer2"
+                    android:textColor="@color/my_text_answer"
+                    android:buttonTint="#5d2626"
+                    android:text="answer2" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_c_s2i_rb_answer3"
+                    android:textColor="@color/my_text_answer"
+                    android:buttonTint="#5d2626"
+                    android:text="answer3" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_c_s2i_rb_answer4"
+                    android:textColor="@color/my_text_answer"
+                    android:buttonTint="#5d2626"
+                    android:text="answer4" />
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:id="@+id/my_c_s2i_rl_2">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_c_s2i_cb_memorization"
+                android:button="@drawable/my_checkbox_img"
+                android:textSize="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

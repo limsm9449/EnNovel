@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#85be3b</color>
+    <color name="colorPrimaryDark">#d9af52</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+
+    <color name="my_button_outline">#192c53</color>
+    <color name="my_button_pressed">#85be3b</color>
+    <color name="my_button_nonpressed">#66912e</color>
+
+    <color name="my_divider">#f17116</color>
+
+    <color name="my_toggle_outline">#ec4a04</color>
+    <color name="my_toggle">#ec4a04</color>
+    <color name="my_toggle_dark">#742604</color>
+    <color name="my_toggle_transparent">#030303</color>
+    <color name="my_white">#ffffff</color>
+
+    <color name="FlatDarkBlue">#2980b9</color>
+
+    <color name="my_text_word">#367696</color>
+    <color name="my_text_mean">#4f8ead</color>
+    <color name="my_text_spelling">#424040</color>
+    <color name="my_text_question">#e65a5a</color>
+    <color name="my_text_answer">#4f8ead</color>
+
+    <color name="my_o_answer">#424040</color>
+    <color name="my_x_answer">#ec4a04</color>
+</resources>

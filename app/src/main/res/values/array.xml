@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="studyKind">
+        <item>단답 학습</item>
+        <item>4지선다 학습</item>
+        <item>카드형 학습</item>
+        <item>카드형 OX 학습</item>
+        <item>카드형 4지선다 학습</item>
+        <item>카드형 4지선다 TTS 학습</item>
+    </string-array>
+
+    <string-array name="fontSize">
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+    </string-array>
+    <string-array name="fontSizeName">
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+    </string-array>
+
+    <string-array name="daumOrderValue">
+        <item>즐겨찾기</item>
+        <item>즐겨찾기 D</item>
+        <item>최근수정</item>
+        <item>최근수정 D</item>
+        <item>제목</item>
+        <item>제목 D</item>
+    </string-array>
+
+    <string-array name="dicOrderValue">
+        <item>등록일 D</item>
+        <item>단어 D</item>
+        <item>뜻 D</item>
+        <item>등록일</item>
+        <item>단어</item>
+        <item>뜻</item>
+        <item>Random</item>
+    </string-array>
+
+    <string-array name="webDic">
+        <item>Naver</item>
+        <item>Daum</item>
+    </string-array>
+
+    <string-array name="wordView">
+        <item>Naver</item>
+        <item>Daum</item>
+        <item>예제</item>
+    </string-array>
+
+    <string-array name="novel">
+        <item>A - Ago</item>
+        <item>Agr - And</item>
+        <item>And - Atl</item>
+        <item>Atl - Bar</item>
+        <item>Bar - Bir</item>
+        <item>Bir - Boy</item>
+        <item>Boy - Can</item>
+        <item>Can - Chi</item>
+        <item>Chi - Com</item>
+        <item>Com - Con</item>
+        <item>Con - Cul</item>
+        <item>Cum - Dia</item>
+        <item>Dia - Dra</item>
+        <item>Dra - Eng</item>
+        <item>Eng - Exp</item>
+        <item>Exp - Fir</item>
+        <item>Fir - Fri</item>
+        <item>Fri - Gin</item>
+        <item>Gio - Gui</item>
+        <item>Gui - Hil</item>
+        <item>Hil - His</item>
+        <item>His - In</item>
+        <item>In - Jac</item>
+        <item>Jac - Kin</item>
+        <item>Kin - Le</item>
+        <item>Le - Lif</item>
+        <item>Lif - Liz</item>
+        <item>Liz - Mai</item>
+        <item>Mai - Mat</item>
+        <item>Mat - Mem</item>
+        <item>Mem - Mir</item>
+        <item>Mir - Mis</item>
+        <item>Mis - My</item>
+        <item>My - Nor</item>
+        <item>Nor - On</item>
+        <item>On - Par</item>
+        <item>Par - Pic</item>
+        <item>Pic - Pop</item>
+        <item>Pop - Pun</item>
+        <item>Pun - Que</item>
+        <item>Que - Rep</item>
+        <item>Rep - Rou</item>
+        <item>Rou - Sci</item>
+        <item>Sci - She</item>
+        <item>Shi - Sop</item>
+        <item>Sor - Str</item>
+        <item>Str - Tex</item>
+        <item>THA - tou</item>
+        <item>Tou - Unb</item>
+        <item>Unb - Vel</item>
+        <item>Ven - Way</item>
+        <item>Way - Wom</item>
+        <item>Wom - Zep</item>
+        <item>Zib - Zul</item>
+    </string-array>
+
+    <string-array name="webTranslate">
+        <item>Naver</item>
+        <item>Google</item>
+    </string-array>
+
+
+</resources>
