@@ -73,17 +73,6 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
 
         changeListView();
 
-        ImageButton mySample = (ImageButton) findViewById(R.id.my_ib_mysample);
-        mySample.setVisibility(View.GONE);  //숨김처리
-        mySample.setOnClickListener(this);
-        if ( DicDb.isExistMySample(db, sampleSeq) ) {
-            isMySample = true;
-            mySample.setImageResource(android.R.drawable.star_on);
-        } else {
-            isMySample = false;
-            mySample.setImageResource(android.R.drawable.star_off);
-        }
-
         ImageButton ib_tts = (ImageButton) findViewById(R.id.my_ib_tts);
         ib_tts.setOnClickListener(this);
 
@@ -212,22 +201,6 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.my_ib_mysample:
-                ImageButton mySample = (ImageButton) findViewById(R.id.my_ib_mysample);
-                if ( isMySample ) {
-                    isMySample = false;
-                    mySample.setImageResource(android.R.drawable.star_off);
-
-                    DicDb.delConversationFromNote(db, "C010001", Integer.parseInt(sampleSeq));
-                } else {
-                    isMySample = true;
-                    mySample.setImageResource(android.R.drawable.star_on);
-
-                    DicDb.insConversationToNote(db, "C010001", sampleSeq);
-                }
-                DicUtils.setDbChange(getApplicationContext());  //DB 변경 체크
-
-                break;
             case R.id.my_ib_tts:
                 //myTTS.speak(((TextView)this.findViewById(R.id.my_c_wv_tv_spelling)).getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                 myTTS.speak(((TextView)this.findViewById(R.id.my_tv_foreign)).getText().toString(), TextToSpeech.QUEUE_FLUSH, null);

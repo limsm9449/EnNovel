@@ -1,7 +1,9 @@
 package com.sleepingbear.ennovel;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             listView.setAdapter(adapter);
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             listView.setOnItemClickListener(itemClickListener);
+            listView.setOnItemLongClickListener(itemLongClickListener);
             listView.setSelection(0);
         }
     }
@@ -113,6 +116,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
+        }
+    };
+
+    AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Cursor cur = (Cursor) adapter.getItem(i);
+            final String seq = cur.getString(cur.getColumnIndexOrThrow("TITLE"));
+            new AlertDialog.Builder(MainActivity.this)
+            .setTitle("알림")
+                    .setMessage("즐겨찾기에서 삭제하시겠습니까?")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            DicDb.updMyUnFavorite(db, seq);
+                            changeListView();
+                            DicUtils.setDbChange(getApplicationContext());  //변경 체크
+                            Toast.makeText(getApplicationContext(), "즐겨찾기에서 삭제했습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+
+            return true;
         }
     };
 
@@ -167,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.my_b_novel:
                 Intent novelIntent = new Intent(getApplication(), MyNovelActivity.class);
                 novelIntent.putExtras(bundle);
-                startActivity(novelIntent);
+                startActivityForResult(novelIntent, CommConstants.a_MyNovel);
 
                 break;
             case R.id.my_b_news_word:
@@ -182,6 +213,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.my_b_voc_study:
                 startActivity(new Intent(getApplication(), StudyActivity.class));
+
+                break;
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        DicUtils.dicLog("onActivityResult : " + requestCode + " : " + resultCode);
+
+        switch ( requestCode ) {
+            case CommConstants.a_MyNovel :
+                if ( resultCode == RESULT_OK && "Y".equals(data.getStringExtra("isChange")) ) {
+                    changeListView();
+                }
 
                 break;
         }
@@ -262,12 +306,9 @@ class MainCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ((TextView) view.findViewById(R.id.my_tv_title)).setText(cursor.getString(cursor.getColumnIndexOrThrow("TITLE")));
-        ((TextView) view.findViewById(R.id.my_tv_path)).setText(cursor.getString(cursor.getColumnIndexOrThrow("PATH")));
         ((TextView) view.findViewById(R.id.my_tv_date)).setText(cursor.getString(cursor.getColumnIndexOrThrow("INS_DATE")));
 
         //사이즈 설정
         ((TextView) view.findViewById(R.id.my_tv_title)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.my_tv_path)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.my_tv_date)).setTextSize(fontSize);
     }
 }

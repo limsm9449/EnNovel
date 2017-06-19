@@ -577,4 +577,31 @@ public class DicDb {
         DicUtils.dicSqlLog(sql.toString());
         db.execSQL(sql.toString());
     }
+
+    public static void insMyNovel(SQLiteDatabase db, String title, String path, String insDate, String favoriteFlag) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("INSERT INTO DIC_MY_NOVEL (TITLE, PATH, INS_DATE, FAVORITE_FLAG)" + CommConstants.sqlCR);
+        sql.append("VALUES('" + title + "','" + path + "','" + insDate + "','" +  favoriteFlag + "')" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
+    public static void updMyFavorite(SQLiteDatabase db, String seq) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("UPDATE  DIC_MY_NOVEL" + CommConstants.sqlCR);
+        sql.append("   SET  FAVORITE_FLAG = 'Y'" + CommConstants.sqlCR);
+        sql.append("WHERE   SEQ = " + seq + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
+    public static void updMyUnFavorite(SQLiteDatabase db, String seq) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("UPDATE  DIC_MY_NOVEL" + CommConstants.sqlCR);
+        sql.append("   SET  FAVORITE_FLAG = 'N'" + CommConstants.sqlCR);
+        sql.append("WHERE   SEQ = " + seq + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
 }

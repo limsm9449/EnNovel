@@ -1,6 +1,7 @@
 package com.sleepingbear.ennovel;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,6 +45,7 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
     private RelativeLayout editRl;
 
     private boolean isEditing;
+    private boolean isChange = false;
 
 
     @Override
@@ -169,12 +171,18 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
     public void changeListView() {
         if ( db != null ) {
             Cursor listCursor = db.rawQuery(DicQuery.getMyNovel(), null);
+            if ( listCursor.getCount() == 0 ) {
+                listCursor = db.rawQuery(DicQuery.getMyNovelMessage(), null);
+                changeEdit(false);
+                invalidateOptionsMenu();
+            }
             ListView listView = (ListView) findViewById(R.id.my_lv);
             adapter = new MyNovelCursorAdapter(this, listCursor, db, 0);
             adapter.editChange(isEditing);
             listView.setAdapter(adapter);
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             listView.setOnItemClickListener(itemClickListener);
+            listView.setOnItemLongClickListener(itemLongClickListener);
             listView.setSelection(0);
         }
     }
@@ -195,6 +203,34 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
+        }
+    };
+
+    AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Cursor cur = (Cursor) adapter.getItem(i);
+            final String seq = cur.getString(cur.getColumnIndexOrThrow("SEQ"));
+            new AlertDialog.Builder(MyNovelActivity.this)
+                    .setTitle("알림")
+                    .setMessage("메인화면 리스트에 나오도록 즐겨찾기로 등록하시겠습니까?")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            DicDb.updMyFavorite(db, seq);
+                            isChange = true;
+                            DicUtils.setDbChange(getApplicationContext());  //변경 체크
+                            Toast.makeText(getApplicationContext(), "즐겨찾기로 등록되었습니다.\n메인 화면에서 리스트를 보실 수 있습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+
+            return true;
         }
     };
 
@@ -248,7 +284,18 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
             editRl.setVisibility(View.GONE);
         }
 
-        adapter.editChange(isEditing);
+        if ( adapter != null ) {
+            adapter.editChange(isEditing);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this.getApplication(), MyNovelActivity.class);
+        intent.putExtra("isChange", (isChange ? "Y" : "N"));
+        setResult(RESULT_OK, intent);
+
+        finish();
     }
 }
 

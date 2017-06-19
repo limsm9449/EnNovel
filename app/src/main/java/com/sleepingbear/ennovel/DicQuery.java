@@ -14,18 +14,13 @@ public class DicQuery {
         sql.append("   AND CODE NOT IN ('VOC0001','C010001')" + CommConstants.sqlCR);
 
         sql.append("UNION" + CommConstants.sqlCR);
-        sql.append("SELECT '" + CommConstants.tag_note_ins + "'||':'||CODE||':'||SAMPLE_SEQ WRITE_DATA " + CommConstants.sqlCR);
-        sql.append(" FROM DIC_NOTE" + CommConstants.sqlCR);
-        sql.append(" WHERE CODE IN (SELECT CODE FROM DIC_CODE WHERE CODE_GROUP IN ('C01','C02') )" + CommConstants.sqlCR);
-
-        sql.append("UNION" + CommConstants.sqlCR);
         sql.append("SELECT '" + CommConstants.tag_voc_ins + "'||':'||A.KIND||':'||A.ENTRY_ID||':'||A.INS_DATE||':'||A.MEMORIZATION WRITE_DATA " + CommConstants.sqlCR);
         sql.append(" FROM DIC_VOC A, DIC B" + CommConstants.sqlCR);
         sql.append(" WHERE A.ENTRY_ID = B.ENTRY_ID" + CommConstants.sqlCR);
 
         sql.append("UNION" + CommConstants.sqlCR);
-        sql.append("SELECT '" + CommConstants.tag_history_ins + "'||':'||SEQ||':'||WORD WRITE_DATA " + CommConstants.sqlCR);
-        sql.append(" FROM DIC_SEARCH_HISTORY" + CommConstants.sqlCR);
+        sql.append("SELECT '" + CommConstants.tag_novel_ins + "'||':'||TITLE||':'||PATH||':'||INS_DATE||':'||FAVORITE_FLAG WRITE_DATA " + CommConstants.sqlCR);
+        sql.append(" FROM DIC_MY_NOVEL" + CommConstants.sqlCR);
 
         sql.append("UNION" + CommConstants.sqlCR);
         sql.append("SELECT '" + CommConstants.tag_click_word_ins + "'||':'||ENTRY_ID||':'||INS_DATE WRITE_DATA " + CommConstants.sqlCR);
@@ -706,11 +701,20 @@ public class DicQuery {
         return sql.toString();
     }
 
+    public static String getMyNovelMessage() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT -1 _id, -1 SEQ, '등록된 소설이 없습니다.' TITLE, '하단의 ''+''를 클릭해서 영문소설을 등록하세요.' PATH, '' INS_DATE" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
 
     public static String getMyFavorite() {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("SELECT SEQ _id, SEQ, TITLE, PATH, INS_DATE" + CommConstants.sqlCR);
+        sql.append("SELECT SEQ _id, SEQ, TITLE, INS_DATE" + CommConstants.sqlCR);
         sql.append("FROM   DIC_MY_NOVEL" + CommConstants.sqlCR);
         sql.append("WHERE  FAVORITE_FLAG = 'Y'" + CommConstants.sqlCR);
         sql.append("ORDER  BY INS_DATE DESC" + CommConstants.sqlCR);
@@ -723,7 +727,7 @@ public class DicQuery {
     public static String getMyFavoriteMessage() {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("SELECT -1 _id, -1 SEQ, '즐겨찾기 목록이 없습니다.' TITLE, '영어소설 화면 리스트에서 소설을 길게 클릭하시면 즐겨찾기로 등록이 됩니다.' PATH, '' INS_DATE" + CommConstants.sqlCR);
+        sql.append("SELECT -1 _id, -1 SEQ, '즐겨찾기 목록이 없습니다.\n영어소설 화면 리스트에서 소설을 길게 클릭하시면 즐겨찾기로 등록이 됩니다.' TITLE, '' INS_DATE" + CommConstants.sqlCR);
 
         DicUtils.dicSqlLog(sql.toString());
 

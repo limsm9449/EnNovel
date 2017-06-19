@@ -209,26 +209,14 @@ public class DicUtils {
                 dicLog(readString);
 
                 String[] row = readString.split(":");
-                if ( row[0].equals("CATEGORY_INSERT") ) {
-                    int maxCode = Integer.parseInt(row[1].substring(2,6));
-                    String insMaxCode = "VOC" + DicUtils.lpadding(Integer.toString(maxCode + 1), 4, "0");
-                    DicDb.insCode(db, "MY_VOC", insMaxCode, row[2]);
-                } else if ( row[0].equals("MYWORD_INSERT") ) {
-                    int maxCode = Integer.parseInt(row[1].substring(2,6));
-                    String insMaxCode = "VOC" + DicUtils.lpadding(Integer.toString(maxCode + 1), 4, "0");
-                    DicDb.insDicVoc(db, insMaxCode, row[3], row[2], "N");
-                } else if ( row[0].equals("MEMORY") ) {
-                    DicDb.updMemory(db, row[1], row[2]);
-                } else if ( row[0].equals(CommConstants.tag_code_ins) ) {
+                if ( row[0].equals(CommConstants.tag_code_ins) ) {
                     DicDb.insCode(db, row[1], row[2], row[3]);
-                } else if ( row[0].equals(CommConstants.tag_note_ins) ) {
-                    DicDb.insConversationToNote(db, row[1], row[2]);
                 } else if ( row[0].equals(CommConstants.tag_voc_ins) ) {
                     DicDb.insDicVoc(db, row[1], row[2], row[3], row[4]);
-                } else if ( row[0].equals(CommConstants.tag_history_ins) ) {
-                    DicDb.insSearchHistory(db, row[1], row[2]);
                 } else if ( row[0].equals(CommConstants.tag_click_word_ins) ) {
                     DicDb.insDicClickWord(db, row[1], row[2]);
+                } else if ( row[0].equals(CommConstants.tag_novel_ins) ) {
+                    DicDb.insMyNovel(db, row[1], row[2], row[3], row[4]);
                 }
 
                 readString = buffreader.readLine();

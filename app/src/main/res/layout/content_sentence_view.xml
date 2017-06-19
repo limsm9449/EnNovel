@@ -61,18 +61,10 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/my_ib_mysample"
                 android:layout_marginLeft="10dp"
-                android:foregroundGravity="center_vertical" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/my_ib_mysample"
-                android:layout_alignParentLeft="false"
                 android:foregroundGravity="center_vertical"
-                android:src="@android:drawable/star_off"
                 android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                android:layout_centerVertical="true" />
+                android:layout_marginRight="10dp" />
+
         </RelativeLayout>
 
         <LinearLayout
