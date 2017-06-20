@@ -147,7 +147,7 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            onBackPressed();
         } else if (id == R.id.action_edit) {
             isEditing = true;
             invalidateOptionsMenu();
@@ -210,26 +210,28 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
             Cursor cur = (Cursor) adapter.getItem(i);
-            final String seq = cur.getString(cur.getColumnIndexOrThrow("SEQ"));
-            new AlertDialog.Builder(MyNovelActivity.this)
-                    .setTitle("알림")
-                    .setMessage("메인화면 리스트에 나오도록 즐겨찾기로 등록하시겠습니까?")
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            DicDb.updMyFavorite(db, seq);
-                            isChange = true;
-                            DicUtils.setDbChange(getApplicationContext());  //변경 체크
-                            Toast.makeText(getApplicationContext(), "즐겨찾기로 등록되었습니다.\n메인 화면에서 리스트를 보실 수 있습니다.", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .show();
+            if ( cur.getInt(cur.getColumnIndexOrThrow("SEQ") )!= -1 ) {
+                final String seq = cur.getString(cur.getColumnIndexOrThrow("SEQ"));
 
+                new AlertDialog.Builder(MyNovelActivity.this)
+                        .setTitle("알림")
+                        .setMessage("메인화면 리스트에 나오도록 즐겨찾기로 등록하시겠습니까?")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DicDb.updMyFavorite(db, seq);
+                                isChange = true;
+                                DicUtils.setDbChange(getApplicationContext());  //변경 체크
+                                Toast.makeText(getApplicationContext(), "즐겨찾기로 등록되었습니다.\n메인 화면에서 리스트를 보실 수 있습니다.", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .show();
+            }
             return true;
         }
     };

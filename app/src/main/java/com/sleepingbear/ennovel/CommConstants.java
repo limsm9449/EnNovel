@@ -47,12 +47,8 @@ public class CommConstants {
 
         //코드 등록
         public static String tag_code_ins = "C_CODE_INS" ;
-        //회화노트 등록
-        public static String tag_note_ins = "C_NOTE_INS" ;
         //단어장 등록
         public static String tag_voc_ins = "C_VOC_INS" ;
-        //History 등록
-        public static String tag_history_ins = "C_HISTORY_INS" ;
         //History 등록
         public static String tag_click_word_ins = "C_CW_INS" ;
         //History 등록
