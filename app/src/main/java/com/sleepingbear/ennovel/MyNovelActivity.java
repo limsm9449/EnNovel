@@ -60,8 +60,8 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final int[] kindCodes = new int[3];
-                final String[] kindCodeNames = new String[3];
+                final int[] kindCodes = new int[4];
+                final String[] kindCodeNames = new String[4];
 
                 int idx = 0;
                 kindCodes[idx] = 0;
@@ -69,6 +69,8 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
                 kindCodes[idx] = 1;
                 kindCodeNames[idx++] = CommConstants.novel_classicreader;
                 kindCodes[idx] = 2;
+                kindCodeNames[idx++] = CommConstants.novel_loyalbooks;
+                kindCodes[idx] = 3;
                 kindCodeNames[idx++] = CommConstants.novel_local;
 
                 final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(MyNovelActivity.this);
@@ -83,7 +85,7 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if ( mSelect == 2 ) {
+                        if ( mSelect == 3 ) {
                             FileChooser filechooser = new FileChooser(MyNovelActivity.this);
                             filechooser.setFileListener(new FileChooser.FileSelectedListener() {
                                 @Override
@@ -103,6 +105,9 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
                             bundle.putInt("SITE_IDX", mSelect);
                         } else if ( mSelect == 1 ) {
                             bundle.putString("SITE", CommConstants.novel_classicreader);
+                            bundle.putInt("SITE_IDX", mSelect);
+                        } else if ( mSelect == 2 ) {
+                            bundle.putString("SITE", CommConstants.novel_loyalbooks);
                             bundle.putInt("SITE_IDX", mSelect);
                         }
                         Intent intent = new Intent(MyNovelActivity.this, NovelActivity.class);
@@ -391,6 +396,7 @@ class MyNovelCursorAdapter extends CursorAdapter {
 
         ((TextView) view.findViewById(R.id.my_tv_title)).setText(cursor.getString(cursor.getColumnIndexOrThrow("TITLE")));
         ((TextView) view.findViewById(R.id.my_tv_date)).setText(cursor.getString(cursor.getColumnIndexOrThrow("INS_DATE")));
+        ((TextView) view.findViewById(R.id.my_tv_path)).setText(cursor.getString(cursor.getColumnIndexOrThrow("PATH")));
 
         //사이즈 설정
         ((TextView) view.findViewById(R.id.my_tv_title)).setTextSize(fontSize);

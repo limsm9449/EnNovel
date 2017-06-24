@@ -604,6 +604,59 @@ public class DicUtils {
         }
     }
 
+    public static void getNovelList2(SQLiteDatabase db, String url, String kind) {
+        dicLog("getNovelList2 : " + url);
+        try {
+            Document doc = getDocument(url);
+            Elements es = doc.select("li.menu-li-bottom p.paginate-bar");
+            String pageStr = es.get(0).text().trim().replaceAll("Page ","").replaceAll("of ","").split(" ")[1];
+            int page = Integer.parseInt(pageStr);
+
+            ArrayList al = new ArrayList();
+            for ( int i = 1; i <= page; i++ ) {
+                String pageUrl = url;
+                if ( i > 1 ) {
+                    doc = getDocument(url + "&page=" + i);
+                }
+                Elements es2 = doc.select("li.list-li");
+                for ( int m = 0; m < es2.size(); m++ ) {
+                    //dicLog(i + " page " + m + " td");
+
+                    Elements esA = es2.get(m).select("a.list-link");
+                    Elements esImg = es2.get(m).select("img");
+                    if ( esA.size() > 0 ) {
+                        HashMap hm = new HashMap();
+                        hm.put("url", esA.get(0).attr("href"));
+                        hm.put("title", esImg.get(0).attr("alt"));
+                        al.add(hm);
+                    }
+                }
+                es2 = doc.select("ul#s-list-ul li");
+                for ( int m = 0; m < es2.size(); m++ ) {
+                    //dicLog(i + " page " + m + " td");
+
+                    Elements esA = es2.get(m).select("a");
+                    if ( esA.size() > 0 ) {
+                        HashMap hm = new HashMap();
+                        hm.put("url", esA.get(0).attr("href"));
+                        hm.put("title", es2.get(m).text().replaceAll("[:]", ""));
+                        al.add(hm);
+                    }
+                }
+            }
+
+            if ( DicDb.getNovelCount(db, kind) != al.size() ) {
+                DicDb.delNovel(db, kind);
+
+                for (int i = 0; i < al.size(); i++) {
+                    DicDb.insNovel(db, kind, (String)((HashMap)al.get(i)).get("title"), (String)((HashMap)al.get(i)).get("url"));
+                }
+            }
+        } catch ( Exception e ) {
+            Log.d(CommConstants.tag, e.getMessage());
+        }
+    }
+
     public static int getNovelPartCount0(String url) {
         int partSize = 0;
         try {
@@ -655,6 +708,24 @@ public class DicUtils {
             contents = doc.select("td.chapter-text p");
             for ( int i = 0; i < contents.size(); i++ ) {
                 rtn += contents.get(i).text() + "\n\n";
+            }
+        } catch ( Exception e ) {
+            Log.d(CommConstants.tag, e.getMessage());
+        }
+
+        return rtn;
+    }
+
+    public static String getNovelContent2(String url) {
+        String rtn = "";
+        try {
+            Document doc = getDocument(url);
+            Elements esA = doc.select("ul#book-ul a");
+            for ( int i = 0; i < esA.size(); i++ ) {
+                if ( esA.get(i).attr("href").indexOf(".txt") >= 0 ) {
+                    doc = getDocument("http://www.loyalbooks.com" + esA.get(i).attr("href"));
+                    rtn = doc.html();
+                }
             }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());

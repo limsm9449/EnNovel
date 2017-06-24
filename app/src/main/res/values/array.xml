@@ -132,7 +132,7 @@
         <item>B</item>
         <item>C</item>
         <item>D</item>
-        <item>EA</item>
+        <item>E</item>
         <item>F</item>
         <item>G</item>
         <item>H</item>
@@ -154,6 +154,28 @@
         <item>X</item>
         <item>Y</item>
         <item>Z</item>
+    </string-array>
+
+    <string-array name="novel2">
+        <item>Adventure</item>
+        <item>Children</item>
+        <item>Comedy</item>
+        <item>Fairy_tales</item>
+        <item>Fantasy</item>
+        <item>Fiction</item>
+        <item>Historical Fiction</item>
+        <item>History</item>
+        <item>Humor</item>
+        <item>Literature</item>
+        <item>Mystery</item>
+        <item>Non-fiction</item>
+        <item>Philosophy</item>
+        <item>Poetry</item>
+        <item>Romance</item>
+        <item>Religion</item>
+        <item>Science fiction</item>
+        <item>Short stories</item>
+        <item>Teen Young adult</item>
     </string-array>
 
     <string-array name="webTranslate">

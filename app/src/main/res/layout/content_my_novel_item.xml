@@ -59,11 +59,27 @@
                 android:textSize="11dp"
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentRight="true"
-                android:textColor="#FF9E9C9C"
+                android:textColor="@color/my_text_mean"
                 android:layout_marginRight="10dp"
                 android:gravity="fill_vertical|fill_horizontal"
                 android:layout_centerVertical="true" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_f_ci_ll">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Path"
+                android:id="@+id/my_tv_path"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/my_text_mean"
+                android:textSize="15dp"
+                android:textStyle="normal|bold" />
         </RelativeLayout>
 
     </RelativeLayout>

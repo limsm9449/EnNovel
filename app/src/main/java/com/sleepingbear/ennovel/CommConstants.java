@@ -58,6 +58,7 @@ public class CommConstants {
 
         public static String novel_fullbooks = "www.fullbooks.com" ;
         public static String novel_classicreader = "www.classicreader.com" ;
+        public static String novel_loyalbooks = "www.loyalbooks.com" ;
         public static String novel_local = "로컬 영문파일" ;
 
 

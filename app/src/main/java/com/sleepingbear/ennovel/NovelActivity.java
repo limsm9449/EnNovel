@@ -82,6 +82,8 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
             adapter = ArrayAdapter.createFromResource(this, R.array.novel0, android.R.layout.simple_spinner_item);
         } else if ( site.equals(CommConstants.novel_classicreader) ) {
             adapter = ArrayAdapter.createFromResource(this, R.array.novel1, android.R.layout.simple_spinner_item);
+        } else if ( site.equals(CommConstants.novel_loyalbooks) ) {
+            adapter = ArrayAdapter.createFromResource(this, R.array.novel2, android.R.layout.simple_spinner_item);
         }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s_novel = (Spinner) findViewById(R.id.my_s_novel);
@@ -100,7 +102,6 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
         s_novel.setSelection(0);
 
         AdView av = (AdView)findViewById(R.id.adView);
@@ -179,6 +180,8 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
             file = DicUtils.getFIle(CommConstants.folderName + CommConstants.novelFolderName, novelUrl.split("[.]")[0] + Part + ".txt");
         } else if ( site.equals(CommConstants.novel_classicreader)) {
             file = DicUtils.getFIle(CommConstants.folderName + CommConstants.novelFolderName, novelUrl.split("[/]")[2] + "_" + Part + ".txt");
+        } else if ( site.equals(CommConstants.novel_loyalbooks)) {
+            file = DicUtils.getFIle(CommConstants.folderName + CommConstants.novelFolderName, novelUrl.split("[/]")[2] + "_" + Part + ".txt");
         }
 
         try {
@@ -196,6 +199,8 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
         if ( site.equals(CommConstants.novel_fullbooks) ) {
             path = Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[.]")[0] + Part + ".txt";
         } else if ( site.equals(CommConstants.novel_classicreader) ) {
+            path = Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[/]")[2] + "_" + Part + ".txt";
+        } else if ( site.equals(CommConstants.novel_loyalbooks) ) {
             path = Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[/]")[2] + "_" + Part + ".txt";
         }
         if ( Part > 0 ) {
@@ -232,11 +237,15 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
         protected Void doInBackground(Void... arg0) {
             if ( taskKind.equals("NOVEL_LIST") ) {
                 if ( site.equals(CommConstants.novel_fullbooks) ) {
-                    DicUtils.getNovelList0(db, "http://www.fullbooks.com/idx" + (s_idx + 1) + ".html", "S0_" + s_idx);
+                    DicUtils.getNovelList0(db, "http://www.fullbooks.com/idx" + (s_idx + 1) + ".html", "S" + siteIdx + "_" + s_idx);
                 } else if ( site.equals(CommConstants.novel_classicreader) ) {
-                    String[] novel1 = getResources().getStringArray(R.array.novel1);
-                    String arrValue = novel1[s_idx];
-                    DicUtils.getNovelList1(db, "http://www.classicreader.com/list/titles/" + arrValue, "S1_" + s_idx);
+                    String[] novelCategory = getResources().getStringArray(R.array.novel1);
+                    String arrValue = novelCategory[s_idx];
+                    DicUtils.getNovelList1(db, "http://www.classicreader.com/list/titles/" + arrValue, "S" + siteIdx + "_" + s_idx);
+                } else if ( site.equals(CommConstants.novel_loyalbooks) ) {
+                    String[] novelCategory = getResources().getStringArray(R.array.novel2);
+                    String arrValue = novelCategory[s_idx];
+                    DicUtils.getNovelList2(db, "http://www.loyalbooks.com/genre/" + arrValue.replaceAll("[ ]","_"), "S" + siteIdx + "_" + s_idx);
                 }
             } else if ( taskKind.equals("NOVEL_CONTENT") ) {
                 if ( site.equals(CommConstants.novel_fullbooks) ) {
@@ -253,7 +262,7 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 } else if ( site.equals(CommConstants.novel_classicreader) ) {
-                    novelPartCount = DicUtils.getNovelPartCount1("http://www.classicreader.com/" + novelUrl);
+                    novelPartCount = DicUtils.getNovelPartCount1("http://www.classicreader.com" + novelUrl);
 
                     if ( novelPartCount == 0 ) {
                         novelContent = DicUtils.getNovelContent1("http://www.classicreader.com" + novelUrl + 1);
@@ -264,6 +273,9 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
                             saveContent(novelContent, i);
                         }
                     }
+                } else if ( site.equals(CommConstants.novel_loyalbooks) ) {
+                    novelContent = DicUtils.getNovelContent2("http://www.loyalbooks.com" + novelUrl);
+                    saveContent(novelContent, 0);
                 }
             }
             return null;
