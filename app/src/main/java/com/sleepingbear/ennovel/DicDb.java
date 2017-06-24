@@ -530,9 +530,10 @@ public class DicDb {
         db.execSQL(sql.toString());
     }
 
-    public static void delNovel(SQLiteDatabase db) {
+    public static void delNovel(SQLiteDatabase db, String kind) {
         StringBuffer sql = new StringBuffer();
         sql.append("DELETE FROM DIC_NOVEL" + CommConstants.sqlCR);
+        sql.append(" WHERE KIND = '" + kind + "'" + CommConstants.sqlCR);
         DicUtils.dicSqlLog(sql.toString());
         db.execSQL(sql.toString());
     }
@@ -572,6 +573,12 @@ public class DicDb {
 
     public static void insMyNovel(SQLiteDatabase db, String title, String path) {
         StringBuffer sql = new StringBuffer();
+        sql.append("DELETE  FROM DIC_MY_NOVEL" + CommConstants.sqlCR);
+        sql.append("WHERE   TITLE = '" + title + "'" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+
+        sql.delete(0, sql.length());
         sql.append("INSERT INTO DIC_MY_NOVEL (TITLE, PATH, INS_DATE, FAVORITE_FLAG)" + CommConstants.sqlCR);
         sql.append("VALUES('" + title + "','" + path + "','" + DicUtils.getDelimiterDate(DicUtils.getCurrentDate(), ".") + "','N')" + CommConstants.sqlCR);
         DicUtils.dicSqlLog(sql.toString());

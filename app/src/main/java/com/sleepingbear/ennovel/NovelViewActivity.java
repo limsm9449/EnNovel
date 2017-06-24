@@ -5,11 +5,14 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -58,6 +61,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
     private String newsUrl;
 
     private ActionMode mActionMode = null;
+    private String novelTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         setSupportActionBar(toolbar);
 
         Bundle b = this.getIntent().getExtras();
-        String novelTitle = b.getString("novelTitle");
+        novelTitle = b.getString("novelTitle");
         String contents = b.getString("content");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -120,8 +124,8 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         webView.addJavascriptInterface(new NovelViewActivity.AndroidBridge(), "android");
         webView.getSettings().setBuiltInZoomControls(false);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setSupportZoom(true);
+        //webView.getSettings().setBuiltInZoomControls(true);
+        //webView.getSettings().setSupportZoom(true);
 
         //webView.setContextClickable(true);
         webView.setWebViewClient(new NovelViewActivity.MyWebViewClient());
@@ -146,6 +150,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
+            saveScrollPosition();
             finish();
         } else if (id == R.id.action_help) {
             Bundle bundle = new Bundle();
@@ -169,6 +174,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
                     if ( webView.canGoBack() ) {
                         webView.goBack();
                     } else {
+                        saveScrollPosition();
                         finish();
                     }
                     return true;
@@ -177,6 +183,12 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         return super.onKeyDown(keyCode, event);
     }
 
+    public void saveScrollPosition() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(novelTitle + "_Y", webView.getScrollY());
+        editor.commit();
+    }
     public void onInit(int status) {
         Locale loc = new Locale("en");
 
@@ -400,6 +412,9 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
                 mProgress.dismiss();
                 mProgress = null;
             }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            view.setScrollY(prefs.getInt(novelTitle + "_Y", 0));
         }
     }
 

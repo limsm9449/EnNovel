@@ -40,7 +40,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentRight="true"
                 android:textColor="#FF9E9C9C"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
 

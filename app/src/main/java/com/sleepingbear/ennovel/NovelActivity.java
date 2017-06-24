@@ -47,8 +47,8 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
     private int s_idx = 0;
     private String novelTitle = "";
     private String novelUrl = "";
-    private String novelPart = "";
-    private int mSelect = 0;
+    private String site = "";
+    private int siteIdx = 0;
 
     NovelTask task;
     private String taskKind = "NOVEL_LIST";
@@ -68,12 +68,21 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
+        Bundle b = getIntent().getExtras();
+        site = b.getString("SITE");
+        siteIdx = b.getInt("SITE_IDX");
+
         fontSize = Integer.parseInt( DicUtils.getPreferencesValue( this, CommConstants.preferences_font ) );
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.novel, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = null;
+        if ( site.equals(CommConstants.novel_fullbooks) ) {
+            adapter = ArrayAdapter.createFromResource(this, R.array.novel0, android.R.layout.simple_spinner_item);
+        } else if ( site.equals(CommConstants.novel_classicreader) ) {
+            adapter = ArrayAdapter.createFromResource(this, R.array.novel1, android.R.layout.simple_spinner_item);
+        }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s_novel = (Spinner) findViewById(R.id.my_s_novel);
         s_novel.setAdapter(adapter);
@@ -126,7 +135,7 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void changeListView() {
-        Cursor listCursor = db.rawQuery(DicQuery.getNovelList("C" + s_idx), null);
+        Cursor listCursor = db.rawQuery(DicQuery.getNovelList("S" + siteIdx + "_" + s_idx), null);
         ListView listView = (ListView) findViewById(R.id.my_lv);
         adapter = new NovelCursorAdapter(this, listCursor, 0);
         listView.setAdapter(adapter);
@@ -138,79 +147,62 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Cursor cur = (Cursor) adapter.getItem(position);
+            final int pos = position;
+            new AlertDialog.Builder(NovelActivity.this)
+                .setTitle("알림")
+                .setMessage("영문소설을 다운로드 하시겠습니까?")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Cursor cur = (Cursor) adapter.getItem(pos);
 
-            novelTitle = cur.getString(cur.getColumnIndexOrThrow("TITLE"));
-            novelUrl = cur.getString(cur.getColumnIndexOrThrow("URL"));
+                        novelTitle = cur.getString(cur.getColumnIndexOrThrow("TITLE"));
+                        novelUrl = cur.getString(cur.getColumnIndexOrThrow("URL"));
 
-            novelPart = "";
-
-            taskKind = "NOVEL_PART";
-            task = new NovelTask();
-            task.execute();
+                        taskKind = "NOVEL_CONTENT";
+                        task = new NovelTask();
+                        task.execute();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
         }
     };
 
-    public void showPart(int novelPartCount) {
-        final int[] kindCodes = new int[novelPartCount];
-        final String[] kindCodeNames = new String[novelPartCount];
-
-        int idx = 0;
-        for (int i = 0; i < novelPartCount; i++) {
-            kindCodes[idx] = i;
-            kindCodeNames[idx] = "Part " + (i + 1);
-            idx++;
+    public void saveContent(String novelContent, int Part) {
+        File file = null;
+        if ( site.equals(CommConstants.novel_fullbooks) ) {
+            file = DicUtils.getFIle(CommConstants.folderName + CommConstants.novelFolderName, novelUrl.split("[.]")[0] + Part + ".txt");
+        } else if ( site.equals(CommConstants.novel_classicreader)) {
+            file = DicUtils.getFIle(CommConstants.folderName + CommConstants.novelFolderName, novelUrl.split("[/]")[2] + "_" + Part + ".txt");
         }
 
-        final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(NovelActivity.this);
-        dlg.setTitle("메뉴 선택");
-        dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                mSelect = arg1;
-            }
-        });
-        dlg.setNegativeButton("취소", null);
-        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                taskKind = "NOVEL_CONTENT";
-                novelPart = "" + (mSelect + 1);
-                task = new NovelTask();
-                task.execute();
-            }
-        });
-        dlg.show();
-    }
-
-    public void saveContent(String novelContent) {
-        File file = DicUtils.getFIle(CommConstants.folderName + CommConstants.novelFolderName, novelUrl.split("[.]")[0] + novelPart + ".txt" );
-        if ( !file.exists() ) {
+        try {
             FileOutputStream fos = null;
-
-            try {
-                file.createNewFile();
-                fos = new FileOutputStream(file);
-                fos.write((novelContent.getBytes()));
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-            }
+            file.createNewFile();
+            fos = new FileOutputStream(file);
+            fos.write((novelContent.getBytes()));
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
         }
 
-        String path = Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[.]")[0] + novelPart + ".txt";
-
-        if ( !"".equals(novelPart) ) {
-            novelTitle = novelTitle + " Part " + novelPart;
+        String path = "";
+        if ( site.equals(CommConstants.novel_fullbooks) ) {
+            path = Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[.]")[0] + Part + ".txt";
+        } else if ( site.equals(CommConstants.novel_classicreader) ) {
+            path = Environment.getExternalStorageDirectory().getAbsoluteFile() + CommConstants.folderName + CommConstants.novelFolderName + "/" + novelUrl.split("[/]")[2] + "_" + Part + ".txt";
         }
-        DicDb.insMyNovel(db, novelTitle, path);
-
-        Intent resultIntent = new Intent();
-        setResult(Activity.RESULT_OK, resultIntent);
-
-        finish();
+        if ( Part > 0 ) {
+            DicDb.insMyNovel(db, novelTitle.replaceAll("['\"]","`") + " Part " + Part, path);
+        } else {
+            DicDb.insMyNovel(db, novelTitle.replaceAll("['\"]","`"), path);
+        }
     }
 
     @Override
@@ -239,16 +231,40 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected Void doInBackground(Void... arg0) {
             if ( taskKind.equals("NOVEL_LIST") ) {
-                DicUtils.getNovelList(db, "http://www.fullbooks.com/idx" + (s_idx + 1) + ".html", "C" + s_idx);
-            } else if ( taskKind.equals("NOVEL_PART") ) {
-                novelPartCount = DicUtils.getNovelPartCount("http://www.fullbooks.com/" + novelUrl);
-                if ( novelPartCount == 0 ) {
-                    taskKind = "NOVEL_CONTENT";
-                    novelContent = DicUtils.getNovelContent("http://www.fullbooks.com/" + novelUrl);
+                if ( site.equals(CommConstants.novel_fullbooks) ) {
+                    DicUtils.getNovelList0(db, "http://www.fullbooks.com/idx" + (s_idx + 1) + ".html", "S0_" + s_idx);
+                } else if ( site.equals(CommConstants.novel_classicreader) ) {
+                    String[] novel1 = getResources().getStringArray(R.array.novel1);
+                    String arrValue = novel1[s_idx];
+                    DicUtils.getNovelList1(db, "http://www.classicreader.com/list/titles/" + arrValue, "S1_" + s_idx);
                 }
             } else if ( taskKind.equals("NOVEL_CONTENT") ) {
-                String[] fileNameSplit = novelUrl.split("[.]");
-                novelContent = DicUtils.getNovelContent("http://www.fullbooks.com/" + fileNameSplit[0] + novelPart + "." + fileNameSplit[1]);
+                if ( site.equals(CommConstants.novel_fullbooks) ) {
+                    novelPartCount = DicUtils.getNovelPartCount0("http://www.fullbooks.com/" + novelUrl);
+
+                    if ( novelPartCount == 0 ) {
+                        novelContent = DicUtils.getNovelContent0("http://www.fullbooks.com/" + novelUrl);
+                        saveContent(novelContent, 0);
+                    } else {
+                        for (int i = 1; i <= novelPartCount; i++) {
+                            String[] fileNameSplit = novelUrl.split("[.]");
+                            novelContent = DicUtils.getNovelContent0("http://www.fullbooks.com/" + fileNameSplit[0] + i + "." + fileNameSplit[1]);
+                            saveContent(novelContent, i);
+                        }
+                    }
+                } else if ( site.equals(CommConstants.novel_classicreader) ) {
+                    novelPartCount = DicUtils.getNovelPartCount1("http://www.classicreader.com/" + novelUrl);
+
+                    if ( novelPartCount == 0 ) {
+                        novelContent = DicUtils.getNovelContent1("http://www.classicreader.com" + novelUrl + 1);
+                        saveContent(novelContent, 0);
+                    } else {
+                        for (int i = 1; i <= novelPartCount; i++) {
+                            novelContent = DicUtils.getNovelContent1("http://www.classicreader.com" + novelUrl + i) + "\n";
+                            saveContent(novelContent, i);
+                        }
+                    }
+                }
             }
             return null;
         }
@@ -260,10 +276,11 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
 
             if ( taskKind.equals("NOVEL_LIST") ) {
                 changeListView();
-            } else if ( taskKind.equals("NOVEL_PART") ) {
-                showPart(novelPartCount);
             } else if ( taskKind.equals("NOVEL_CONTENT") ) {
-                saveContent(novelContent);
+                Intent resultIntent = new Intent();
+                setResult(Activity.RESULT_OK, resultIntent);
+
+                finish();
             }
 
             super.onPostExecute(result);

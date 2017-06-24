@@ -714,7 +714,7 @@ public class DicQuery {
     public static String getMyFavorite() {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("SELECT SEQ _id, SEQ, TITLE, INS_DATE" + CommConstants.sqlCR);
+        sql.append("SELECT SEQ _id, SEQ, TITLE, PATH, INS_DATE" + CommConstants.sqlCR);
         sql.append("FROM   DIC_MY_NOVEL" + CommConstants.sqlCR);
         sql.append("WHERE  FAVORITE_FLAG = 'Y'" + CommConstants.sqlCR);
         sql.append("ORDER  BY INS_DATE DESC" + CommConstants.sqlCR);

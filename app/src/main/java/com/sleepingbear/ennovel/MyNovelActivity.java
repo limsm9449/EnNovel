@@ -60,29 +60,57 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                Intent intent = new Intent(MyNovelActivity.this, NovelActivity.class);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, 1);
-            }
-        });
-        fab.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                FileChooser filechooser = new FileChooser(MyNovelActivity.this);
-                filechooser.setFileListener(new FileChooser.FileSelectedListener() {
-                    @Override
-                    public void fileSelected(final File file) {
-                        DicDb.insMyNovel(db, file.getName(), file.getAbsolutePath());
-                        changeListView();
+                final int[] kindCodes = new int[3];
+                final String[] kindCodeNames = new String[3];
 
-                        Toast.makeText(getApplicationContext(), "소설을 추가했습니다.", Toast.LENGTH_LONG).show();
+                int idx = 0;
+                kindCodes[idx] = 0;
+                kindCodeNames[idx++] = CommConstants.novel_fullbooks;
+                kindCodes[idx] = 1;
+                kindCodeNames[idx++] = CommConstants.novel_classicreader;
+                kindCodes[idx] = 2;
+                kindCodeNames[idx++] = CommConstants.novel_local;
+
+                final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(MyNovelActivity.this);
+                dlg.setTitle("메뉴 선택");
+                dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        mSelect = arg1;
                     }
                 });
-                filechooser.setExtension("txt");
-                filechooser.showDialog();
+                dlg.setNegativeButton("취소", null);
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if ( mSelect == 2 ) {
+                            FileChooser filechooser = new FileChooser(MyNovelActivity.this);
+                            filechooser.setFileListener(new FileChooser.FileSelectedListener() {
+                                @Override
+                                public void fileSelected(final File file) {
+                                    DicDb.insMyNovel(db, file.getName(), file.getAbsolutePath());
+                                    changeListView();
 
-                return false;
+                                    Toast.makeText(getApplicationContext(), "소설을 추가했습니다.", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            filechooser.setExtension("txt");
+                            filechooser.showDialog();
+                        }
+                        Bundle bundle = new Bundle();
+                        if ( mSelect == 0 ) {
+                            bundle.putString("SITE", CommConstants.novel_fullbooks);
+                            bundle.putInt("SITE_IDX", mSelect);
+                        } else if ( mSelect == 1 ) {
+                            bundle.putString("SITE", CommConstants.novel_classicreader);
+                            bundle.putInt("SITE_IDX", mSelect);
+                        }
+                        Intent intent = new Intent(MyNovelActivity.this, NovelActivity.class);
+                        intent.putExtras(bundle);
+                        startActivityForResult(intent, 1);
+                    }
+                });
+                dlg.show();
             }
         });
 
@@ -197,7 +225,8 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
 
                 String content = DicUtils.getMyNovelContent(cur.getString(cur.getColumnIndexOrThrow("PATH")));
                 bundle.putString("novelTitle", cur.getString(cur.getColumnIndexOrThrow("TITLE")));
-                bundle.putString("content", DicUtils.getHtmlString(content));
+                int fontsize = Integer.parseInt( DicUtils.getPreferencesValue( getApplicationContext(), CommConstants.preferences_webViewFont ) );
+                bundle.putString("content", DicUtils.getHtmlString(content, fontsize));
 
                 Intent intent = new Intent(MyNovelActivity.this, NovelViewActivity.class);
                 intent.putExtras(bundle);
@@ -361,13 +390,10 @@ class MyNovelCursorAdapter extends CursorAdapter {
         viewHolder.cb.setTag(viewHolder);
 
         ((TextView) view.findViewById(R.id.my_tv_title)).setText(cursor.getString(cursor.getColumnIndexOrThrow("TITLE")));
-        ((TextView) view.findViewById(R.id.my_tv_path)).setText(cursor.getString(cursor.getColumnIndexOrThrow("PATH")));
         ((TextView) view.findViewById(R.id.my_tv_date)).setText(cursor.getString(cursor.getColumnIndexOrThrow("INS_DATE")));
 
         //사이즈 설정
         ((TextView) view.findViewById(R.id.my_tv_title)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.my_tv_path)).setTextSize(fontSize);
-        ((TextView) view.findViewById(R.id.my_tv_date)).setTextSize(fontSize);
 
         if ( isCheck[cursor.getPosition()] ) {
             ((CheckBox)view.findViewById(R.id.my_cb_check)).setButtonDrawable(android.R.drawable.checkbox_on_background);

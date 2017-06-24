@@ -24,6 +24,7 @@ public class CommConstants {
         public static String screen_my_novel = "SCREEN_MY_NOVEL";
 
         public static String preferences_font = "key_fontSize";
+        public static String preferences_webViewFont = "key_webViewFontSize";
 
         public static String vocabularyCode = "MY_VOC";
         public static String defaultVocabularyCode = "VOC0001";
@@ -53,6 +54,11 @@ public class CommConstants {
         public static String tag_click_word_ins = "C_CW_INS" ;
         //History 등록
         public static String tag_novel_ins = "C_NOVEL_INS" ;
+
+
+        public static String novel_fullbooks = "www.fullbooks.com" ;
+        public static String novel_classicreader = "www.classicreader.com" ;
+        public static String novel_local = "로컬 영문파일" ;
 
 
         public final static int a_MyNovel = 1;

@@ -28,6 +28,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private SQLiteDatabase db;
     private PreferenceScreen screen;
     private ListPreference mFontSize;
+    private ListPreference mWebViewFontSize;
 
 
 
@@ -39,12 +40,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         screen = getPreferenceScreen();
 
         mFontSize = (ListPreference) screen.findPreference("key_fontSize");
+        mFontSize.setOnPreferenceChangeListener(this);
+
+        mWebViewFontSize = (ListPreference) screen.findPreference("key_webViewFontSize");
+        mWebViewFontSize.setOnPreferenceChangeListener(this);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
 
-        //변화 이벤트가 일어났을 시 동작
-        mFontSize.setOnPreferenceChangeListener(this);
 
 
     }
@@ -182,6 +185,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             ListPreference listPreference = (ListPreference) preference;
             int index = listPreference.findIndexOfValue(value);
             mFontSize.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
+        } else if ( preference == mWebViewFontSize ) {
+            ListPreference listPreference = (ListPreference) preference;
+            int index = listPreference.findIndexOfValue(value);
+            mWebViewFontSize.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
         }
         return true;
     }
@@ -189,5 +196,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void updateSummary(){
         mFontSize.setSummary(mFontSize.getEntry());
+        mWebViewFontSize.setSummary(mWebViewFontSize.getEntry());
     }
 }

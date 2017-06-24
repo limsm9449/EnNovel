@@ -9,6 +9,15 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"/>
 
+    <ListPreference
+        android:defaultValue="3"
+        android:key="key_webViewFontSize"
+        android:title="영어소설 폰트 사이즈"
+        android:entries="@array/webViewFontSize"
+        android:entryValues="@array/webViewFontSize"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"/>
+
     <PreferenceCategory android:title="백업 / 복구">
         <Preference
             android:key="key_backup"

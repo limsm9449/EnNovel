@@ -60,32 +60,9 @@
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentRight="true"
                 android:textColor="#FF9E9C9C"
-                android:layout_marginRight="10dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/my_f_ci_ll_2"
-            android:layout_below="@+id/my_f_ci_ll"
-            android:gravity="center"
-            android:layout_alignParentBottom="false">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mean"
-                android:id="@+id/my_tv_path"
-                android:layout_alignParentBottom="false"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentEnd="false"
-                android:textColor="@color/my_text_mean"
-                android:textSize="13dp"
-                android:layout_alignParentLeft="false"
-                android:layout_alignWithParentIfMissing="false"
-                android:layout_alignParentTop="false"
-                android:gravity="center_vertical|left" />
+                android:layout_marginRight="10dp"
+                android:gravity="fill_vertical|fill_horizontal"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
 

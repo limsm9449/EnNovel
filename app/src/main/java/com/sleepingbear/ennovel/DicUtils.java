@@ -453,6 +453,8 @@ public class DicUtils {
         if ( "".equals( rtn ) ) {
             if ( preference.equals(CommConstants.preferences_font) ) {
                 rtn = "17";
+            } else if ( preference.equals(CommConstants.preferences_webViewFont) ) {
+                rtn = "3";
             } else {
                 rtn = "";
             }
@@ -568,13 +570,13 @@ public class DicUtils {
         return wordAl;
     }
 
-    public static void getNovelList(SQLiteDatabase db, String url, String kind) {
+    public static void getNovelList0(SQLiteDatabase db, String url, String kind) {
         try {
             Document doc = getDocument(url);
             Elements es = doc.select("li a");
 
             if ( DicDb.getNovelCount(db, kind) != es.size() ) {
-                DicDb.delNovel(db);
+                DicDb.delNovel(db, kind);
 
                 for (int m = 0; m < es.size(); m++) {
                     DicDb.insNovel(db, kind, es.get(m).text(), es.get(m).attr("href"));
@@ -585,7 +587,24 @@ public class DicUtils {
         }
     }
 
-    public static int getNovelPartCount(String url) {
+    public static void getNovelList1(SQLiteDatabase db, String url, String kind) {
+        try {
+            Document doc = getDocument(url);
+            Elements es = doc.select("ul.titlelist li");
+
+            if ( DicDb.getNovelCount(db, kind) != es.size() ) {
+                DicDb.delNovel(db, kind);
+
+                for (int m = 0; m < es.size(); m++) {
+                    DicDb.insNovel(db, kind, es.get(m).text(), es.get(m).child(0).attr("href"));
+                }
+            }
+        } catch ( Exception e ) {
+            Log.d(CommConstants.tag, e.getMessage());
+        }
+    }
+
+    public static int getNovelPartCount0(String url) {
         int partSize = 0;
         try {
             Document doc = getDocument(url);
@@ -598,12 +617,45 @@ public class DicUtils {
         return partSize;
     }
 
-    public static String getNovelContent(String url) {
+    public static int getNovelPartCount1(String url) {
+        int partSize = 0;
+        try {
+            Document doc = getDocument(url);
+            Elements es = doc.select("ul.chapter-list li");
+            partSize = es.size();
+        } catch ( Exception e ) {
+            Log.d(CommConstants.tag, e.getMessage());
+        }
+
+        return partSize;
+    }
+
+    public static String getNovelContent0(String url) {
         String rtn = "";
         try {
             Document doc = getDocument(url);
             Elements contents = doc.select("td font");
             rtn = contents.get(1).html().replaceAll("<br /> <br />", "\n").replaceAll("&quot;","\"").replaceAll("<br />","");
+        } catch ( Exception e ) {
+            Log.d(CommConstants.tag, e.getMessage());
+        }
+
+        return rtn;
+    }
+
+    public static String getNovelContent1(String url) {
+        String rtn = "";
+        try {
+            Document doc = getDocument(url);
+            Elements contents = doc.select("td.chapter-text span.chapter-heading");
+            if ( contents.size() > 0 ) {
+                rtn += contents.get(0).text() + "\n\n\n";
+            }
+
+            contents = doc.select("td.chapter-text p");
+            for ( int i = 0; i < contents.size(); i++ ) {
+                rtn += contents.get(i).text() + "\n\n";
+            }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());
         }
@@ -621,7 +673,7 @@ public class DicUtils {
         return saveFile;
     }
 
-    public static String getHtmlString(String contents) {
+    public static String getHtmlString(String contents, int fontSize) {
         StringBuffer sb = new StringBuffer();
         sb.append("<!doctype html>");
         sb.append("<html>");
@@ -640,9 +692,9 @@ public class DicUtils {
         sb.append("</script>");
 
         sb.append("<body>");
-        sb.append("<div id='contents'>");
+        sb.append("<font size='" + fontSize + "' face='돋움'><div id='contents'>");
         sb.append(contents);
-        sb.append("</body>");
+        sb.append("</div></font></body>");
         sb.append("</html>");
 
         return sb.toString();

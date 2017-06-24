@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String content = DicUtils.getMyNovelContent(cur.getString(cur.getColumnIndexOrThrow("PATH")));
                 bundle.putString("novelTitle", cur.getString(cur.getColumnIndexOrThrow("TITLE")));
-                bundle.putString("content", DicUtils.getHtmlString(content));
+                int fontsize = Integer.parseInt( DicUtils.getPreferencesValue( getApplicationContext(), CommConstants.preferences_webViewFont ) );
+                bundle.putString("content", DicUtils.getHtmlString(content, fontsize));
 
                 Intent intent = new Intent(MainActivity.this, NovelViewActivity.class);
                 intent.putExtras(bundle);
