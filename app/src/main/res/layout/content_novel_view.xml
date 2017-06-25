@@ -5,6 +5,8 @@
     android:id="@+id/content_novel_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.sleepingbear.ennovel.NovelViewActivity"
     tools:showIn="@layout/activity_novel_view">
@@ -23,9 +25,61 @@
         android:id="@+id/my_c_novelview_wv"
         android:layout_alignParentBottom="false"
         android:layout_below="@+id/my_c_novelview_ll"
-        android:layout_above="@+id/my_c_novelview_rl" >
+        android:layout_above="@+id/my_c_novelview_ll2" >
 
     </WebView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/my_divider"
+        android:layout_marginTop="5dp"
+        android:id="@+id/my_c_novelview_ll2"
+        android:layout_above="@+id/my_c_novelview_rl2"></LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_above="@+id/my_c_novelview_ll3"
+        android:id="@+id/my_c_novelview_rl2"
+        android:layout_height="40dp">
+
+        <Spinner
+            android:layout_height="wrap_content"
+            android:id="@+id/my_s_page"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="140dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:id="@+id/my_iv_prev"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/my_iv_next"
+            android:layout_marginRight="30dp" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:id="@+id/my_iv_next"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/my_divider"
+        android:layout_marginTop="5dp"
+        android:id="@+id/my_c_novelview_ll3"
+        android:layout_above="@+id/my_c_novelview_rl"></LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

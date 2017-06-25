@@ -30,15 +30,20 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class NovelViewActivity extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
@@ -62,6 +67,13 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
 
     private ActionMode mActionMode = null;
     private String novelTitle;
+    private String path;
+    private String contents;
+    private String htmlContents;
+    private int page = 0;
+    private int pageCount = 0;
+    private int pageSize = 10000;
+    private Spinner sPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +85,13 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
 
         Bundle b = this.getIntent().getExtras();
         novelTitle = b.getString("novelTitle");
-        String contents = b.getString("content");
+        path = b.getString("path");
+
+        //해당 페이지 내용을 가져온다.
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        page = prefs.getInt(novelTitle + "_PAGE", 0);
+
+        fontSize = Integer.parseInt( DicUtils.getPreferencesValue( this, CommConstants.preferences_webViewFont ) );
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
@@ -84,8 +102,6 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         ab.setDisplayHomeAsUpEnabled(true);
 
         myTTS = new TextToSpeech(this, this);
-
-        fontSize = Integer.parseInt( DicUtils.getPreferencesValue( this, CommConstants.preferences_font ) );
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -119,6 +135,9 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         this.findViewById(R.id.my_c_novelview_ib_add).setOnClickListener(this);
         this.findViewById(R.id.my_c_novelview_ib_search).setOnClickListener(this);
 
+        this.findViewById(R.id.my_iv_prev).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_next).setOnClickListener(this);
+
         webView = (WebView) this.findViewById(R.id.my_c_novelview_wv);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new NovelViewActivity.AndroidBridge(), "android");
@@ -130,13 +149,50 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         //webView.setContextClickable(true);
         webView.setWebViewClient(new NovelViewActivity.MyWebViewClient());
         //webView.loadUrl(url);
-        webView.loadDataWithBaseURL(null, contents, "text/html", "UTF-8", null);
+
+        //페이지 설정
+        initPage();
 
         AdView av = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new  AdRequest.Builder().build();
         av.loadAd(adRequest);
     }
 
+    public void initPage() {
+        sPage = (Spinner) findViewById(R.id.my_s_page);
+
+        pageCount = DicUtils.getFilePageCount(path, pageSize);
+        ArrayList<String> al = new ArrayList<String>();
+        for ( int i = 0; i < pageCount; i++ ) {
+            al.add((i + 1) + " page");
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, al);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sPage.setAdapter(adapter);
+        sPage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                page = parent.getSelectedItemPosition();
+                webView.scrollTo(0, 0);
+                showPageContent();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        sPage.setSelection(page);
+        //DicUtils.dicLog("pageCount : "  + pageCount);
+    }
+
+    public void showPageContent() {
+        contents = DicUtils.getFilePageContent(path, pageSize, page + 1);
+        htmlContents = DicUtils.getHtmlString(contents, fontSize);
+
+        webView.loadDataWithBaseURL(null, htmlContents, "text/html", "UTF-8", null);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // 상단 메뉴 구성
@@ -184,9 +240,11 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void saveScrollPosition() {
+        DicUtils.dicLog("scroll : " + webView.getScrollY() + " : " + page);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(novelTitle + "_Y", webView.getScrollY());
+        //editor.putInt(novelTitle + "_Y", webView.getScrollY());
+        editor.putInt(novelTitle + "_PAGE", page);
         editor.commit();
     }
     public void onInit(int status) {
@@ -253,6 +311,16 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
             dlg.show();
         } else if ( v.getId() == R.id.my_c_novelview_ib_search ) {
             wordSearch();
+        } else if ( v.getId() == R.id.my_iv_prev ) {
+            if ( page > 0 ) {
+                page--;
+                sPage.setSelection(page);
+            }
+        } else if ( v.getId() == R.id.my_iv_next ) {
+            if ( page < pageCount - 1 ) {
+                page++;
+                sPage.setSelection(page);
+            }
         }
     }
 
@@ -413,8 +481,9 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
                 mProgress = null;
             }
 
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            view.setScrollY(prefs.getInt(novelTitle + "_Y", 0));
+            view.scrollTo(0, 0);
+            //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            //view.scrollTo(0, prefs.getInt(novelTitle + "_Y", 0));
         }
     }
 

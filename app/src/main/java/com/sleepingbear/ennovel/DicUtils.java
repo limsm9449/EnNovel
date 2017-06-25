@@ -20,7 +20,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -575,12 +578,10 @@ public class DicUtils {
             Document doc = getDocument(url);
             Elements es = doc.select("li a");
 
-            if ( DicDb.getNovelCount(db, kind) != es.size() ) {
-                DicDb.delNovel(db, kind);
+            DicDb.delNovel(db, kind);
 
-                for (int m = 0; m < es.size(); m++) {
-                    DicDb.insNovel(db, kind, es.get(m).text(), es.get(m).attr("href"));
-                }
+            for (int m = 0; m < es.size(); m++) {
+                DicDb.insNovel(db, kind, es.get(m).text(), es.get(m).attr("href"));
             }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());
@@ -592,12 +593,10 @@ public class DicUtils {
             Document doc = getDocument(url);
             Elements es = doc.select("ul.titlelist li");
 
-            if ( DicDb.getNovelCount(db, kind) != es.size() ) {
-                DicDb.delNovel(db, kind);
+            DicDb.delNovel(db, kind);
 
-                for (int m = 0; m < es.size(); m++) {
-                    DicDb.insNovel(db, kind, es.get(m).text(), es.get(m).child(0).attr("href"));
-                }
+            for (int m = 0; m < es.size(); m++) {
+                DicDb.insNovel(db, kind, es.get(m).text(), es.get(m).child(0).attr("href"));
             }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());
@@ -645,12 +644,10 @@ public class DicUtils {
                 }
             }
 
-            if ( DicDb.getNovelCount(db, kind) != al.size() ) {
-                DicDb.delNovel(db, kind);
+            DicDb.delNovel(db, kind);
 
-                for (int i = 0; i < al.size(); i++) {
-                    DicDb.insNovel(db, kind, (String)((HashMap)al.get(i)).get("title"), (String)((HashMap)al.get(i)).get("url"));
-                }
+            for (int i = 0; i < al.size(); i++) {
+                DicDb.insNovel(db, kind, (String)((HashMap)al.get(i)).get("title"), (String)((HashMap)al.get(i)).get("url"));
             }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());
@@ -717,21 +714,27 @@ public class DicUtils {
     }
 
     public static String getNovelContent2(String url) {
-        String rtn = "";
+        StringBuffer rtn = new StringBuffer();
         try {
             Document doc = getDocument(url);
             Elements esA = doc.select("ul#book-ul a");
             for ( int i = 0; i < esA.size(); i++ ) {
                 if ( esA.get(i).attr("href").indexOf(".txt") >= 0 ) {
-                    doc = getDocument("http://www.loyalbooks.com" + esA.get(i).attr("href"));
-                    rtn = doc.html();
+                    InputStream inputStream = new URL("http://www.loyalbooks.com" + esA.get(i).attr("href")).openStream();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
+                    String line;
+                    while((line = rd.readLine()) != null) {
+                        rtn.append(line);
+                        rtn.append('\n');
+                    }
+                    rd.close();
                 }
             }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());
         }
 
-        return rtn;
+        return rtn.toString();
     }
 
     public static File getFIle(String folderName, String fileName) {
@@ -805,4 +808,88 @@ public class DicUtils {
 
         return content;
     }
+
+    public static String getFilePageContent(String path, int pageSize, int page) {
+        //dicLog("getFilePageContent : " + pageSize + " : " + page);
+        String content = "";
+        try {
+            FileInputStream fis = new FileInputStream(new File(path));
+            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+
+            String temp = "";
+            int getContentSize = 0;
+            while( (temp = br.readLine()) != null) {
+                getContentSize += temp.length();
+                if ( getContentSize > ( page - 1 ) * pageSize && getContentSize < page * pageSize ) {
+                    content += temp + "\n";
+                } else if ( getContentSize > page * pageSize ) {
+                    break;
+                }
+            }
+
+            try {
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                isr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        }
+
+        //dicLog("content length : " + content.length());
+        return content;
+    }
+
+    public static int getFilePageCount(String path, int pageSize) {
+        int getContentSize = 0;
+        try {
+            FileInputStream fis = new FileInputStream(new File(path));
+            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+
+            String temp = "";
+            while( (temp = br.readLine()) != null) {
+                getContentSize += temp.length();
+            }
+
+            try {
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                isr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        }
+
+        int pageCount = (int)Math.ceil(getContentSize / pageSize);
+        if ( getContentSize - pageCount * pageSize > 0 ) {
+            pageCount++;
+        }
+        //dicLog("content page : " + getContentSize + " : " + pageSize + " : " + pageCount);
+        return pageCount;
+    }
+
 }

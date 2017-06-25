@@ -228,10 +228,8 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
 
                 Bundle bundle = new Bundle();
 
-                String content = DicUtils.getMyNovelContent(cur.getString(cur.getColumnIndexOrThrow("PATH")));
                 bundle.putString("novelTitle", cur.getString(cur.getColumnIndexOrThrow("TITLE")));
-                int fontsize = Integer.parseInt( DicUtils.getPreferencesValue( getApplicationContext(), CommConstants.preferences_webViewFont ) );
-                bundle.putString("content", DicUtils.getHtmlString(content, fontsize));
+                bundle.putString("path", cur.getString(cur.getColumnIndexOrThrow("PATH")));
 
                 Intent intent = new Intent(MyNovelActivity.this, NovelViewActivity.class);
                 intent.putExtras(bundle);
