@@ -22,6 +22,7 @@ public class CommConstants {
         public static String screen_novel = "SCREEN_NOVEL";
         public static String screen_novelView = "SCREEN_NOVEL_VIEW";
         public static String screen_my_novel = "SCREEN_MY_NOVEL";
+        public static String screen_novelSite = "SCREEN_NOVEL_SITE";
 
         public static String preferences_font = "key_fontSize";
         public static String preferences_webViewFont = "key_webViewFontSize";

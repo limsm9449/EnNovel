@@ -74,7 +74,7 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
                 kindCodeNames[idx++] = CommConstants.novel_local;
 
                 final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(MyNovelActivity.this);
-                dlg.setTitle("메뉴 선택");
+                dlg.setTitle("사이트 선택");
                 dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -98,21 +98,22 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
                             });
                             filechooser.setExtension("txt");
                             filechooser.showDialog();
+                        } else {
+                            Bundle bundle = new Bundle();
+                            if (mSelect == 0) {
+                                bundle.putString("SITE", CommConstants.novel_fullbooks);
+                                bundle.putInt("SITE_IDX", mSelect);
+                            } else if (mSelect == 1) {
+                                bundle.putString("SITE", CommConstants.novel_classicreader);
+                                bundle.putInt("SITE_IDX", mSelect);
+                            } else if (mSelect == 2) {
+                                bundle.putString("SITE", CommConstants.novel_loyalbooks);
+                                bundle.putInt("SITE_IDX", mSelect);
+                            }
+                            Intent intent = new Intent(MyNovelActivity.this, NovelActivity.class);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent, 1);
                         }
-                        Bundle bundle = new Bundle();
-                        if ( mSelect == 0 ) {
-                            bundle.putString("SITE", CommConstants.novel_fullbooks);
-                            bundle.putInt("SITE_IDX", mSelect);
-                        } else if ( mSelect == 1 ) {
-                            bundle.putString("SITE", CommConstants.novel_classicreader);
-                            bundle.putInt("SITE_IDX", mSelect);
-                        } else if ( mSelect == 2 ) {
-                            bundle.putString("SITE", CommConstants.novel_loyalbooks);
-                            bundle.putInt("SITE_IDX", mSelect);
-                        }
-                        Intent intent = new Intent(MyNovelActivity.this, NovelActivity.class);
-                        intent.putExtras(bundle);
-                        startActivityForResult(intent, 1);
                     }
                 });
                 dlg.show();

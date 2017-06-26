@@ -20,6 +20,7 @@
     <string name="title_activity_novel">영어소설 검색</string>
     <string name="title_activity_novel_view">영어소설</string>
     <string name="title_activity_my_novel">영어소설</string>
+    <string name="title_activity_novel_site">영문 소설 사이트</string>
 
 
     <!-- action -->

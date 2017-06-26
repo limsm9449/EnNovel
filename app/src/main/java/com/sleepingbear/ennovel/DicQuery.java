@@ -734,4 +734,23 @@ public class DicQuery {
         return sql.toString();
     }
 
+    public static String getNovelSiteList() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT  1 _id, 'www.classicreader.com' SITE" + CommConstants.sqlCR);
+        sql.append("UNION" + CommConstants.sqlCR);
+        sql.append("SELECT  1 _id, 'www.free-ebooks.net' SITE" + CommConstants.sqlCR);
+        sql.append("UNION" + CommConstants.sqlCR);
+        sql.append("SELECT  0 _id, 'www.fullbooks.com' SITE" + CommConstants.sqlCR);
+        sql.append("UNION" + CommConstants.sqlCR);
+        sql.append("SELECT  1 _id, 'www.gutenberg.org' SITE" + CommConstants.sqlCR);
+        sql.append("UNION" + CommConstants.sqlCR);
+        sql.append("SELECT  1 _id, 'www.loyalbooks.com' SITE" + CommConstants.sqlCR);
+        sql.append("UNION" + CommConstants.sqlCR);
+        sql.append("SELECT  1 _id, 'manybooks.net' SITE" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
+
 }

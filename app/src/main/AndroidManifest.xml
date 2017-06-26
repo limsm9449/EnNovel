@@ -24,11 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MyNovelActivity"
             android:label="@string/title_activity_my_novel"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NovelActivity"
             android:label="@string/title_activity_novel"
@@ -41,7 +40,6 @@
             android:name=".NewsClickWordActivity"
             android:label="@string/title_activity_news_click_word"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".VocabularyNoteActivity"
             android:label="@string/title_activity_vocabulary_note"
@@ -75,7 +73,6 @@
             android:name=".Study6Activity"
             android:label="@string/title_activity_study6"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".WordViewActivity"
             android:label="@string/title_activity_word_view"
@@ -110,6 +107,10 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".NovelSiteActivity"
+            android:label="@string/title_activity_novel_site"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

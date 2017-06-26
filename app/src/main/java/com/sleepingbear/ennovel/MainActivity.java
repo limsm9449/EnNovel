@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkPermission();
 
         findViewById(R.id.my_b_novel).setOnClickListener(this);
+        findViewById(R.id.my_b_novel_site).setOnClickListener(this);
         findViewById(R.id.my_b_news_word).setOnClickListener(this);
 
         findViewById(R.id.my_b_voc).setOnClickListener(this);
@@ -107,11 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if ( cur.getInt(cur.getColumnIndexOrThrow("SEQ")) != -1 ) {
                 Bundle bundle = new Bundle();
-
-                String content = DicUtils.getMyNovelContent(cur.getString(cur.getColumnIndexOrThrow("PATH")));
                 bundle.putString("novelTitle", cur.getString(cur.getColumnIndexOrThrow("TITLE")));
-                int fontsize = Integer.parseInt( DicUtils.getPreferencesValue( getApplicationContext(), CommConstants.preferences_webViewFont ) );
-                bundle.putString("content", DicUtils.getHtmlString(content, fontsize));
+                bundle.putString("path", cur.getString(cur.getColumnIndexOrThrow("PATH")));
 
                 Intent intent = new Intent(MainActivity.this, NovelViewActivity.class);
                 intent.putExtras(bundle);
@@ -200,6 +198,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent novelIntent = new Intent(getApplication(), MyNovelActivity.class);
                 novelIntent.putExtras(bundle);
                 startActivityForResult(novelIntent, CommConstants.a_MyNovel);
+
+                break;
+            case R.id.my_b_novel_site:
+                Intent novelSiteIntent = new Intent(getApplication(), NovelSiteActivity.class);
+                novelSiteIntent.putExtras(bundle);
+                startActivity(novelSiteIntent);
 
                 break;
             case R.id.my_b_news_word:
