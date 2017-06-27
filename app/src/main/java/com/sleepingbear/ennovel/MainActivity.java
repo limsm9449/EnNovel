@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             return true;
         } else if (id == R.id.action_no_ad) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.sleepingbear.pehdictandvoc")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.sleepingbear.pennovel")));
         }
 
         return super.onOptionsItemSelected(item);

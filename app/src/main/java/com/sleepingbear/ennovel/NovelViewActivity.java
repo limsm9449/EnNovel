@@ -56,7 +56,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
     private String entryId = "";
 
     private String clickWord;
-    private WebView webView;
+    public WebView webView;
     private final Handler handler = new Handler();
     private ProgressDialog mProgress;
     private int mSelect = 0;
@@ -116,12 +116,14 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         mean.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent intent = new Intent(getApplication(), WordViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("entryId", entryId);
-                intent.putExtras(bundle);
+                if ( entryId != null && !"".equals(entryId) ) {
+                    Intent intent = new Intent(getApplication(), WordViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("entryId", entryId);
+                    intent.putExtras(bundle);
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
 
                 return false;
             }
@@ -481,9 +483,12 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
                 mProgress = null;
             }
 
-            view.scrollTo(0, 0);
-            //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            //view.scrollTo(0, prefs.getInt(novelTitle + "_Y", 0));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    webView.scrollTo(0, 0);
+                }
+            }, 300);
         }
     }
 

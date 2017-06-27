@@ -10,7 +10,7 @@
     <string name="title_activity_vocabulary_note">단어장</string>
     <string name="title_activity_vocabulary_note_view">단어장 상세</string>
     <string name="title_activity_web_translate">번역</string>
-    <string name="title_activity_study">StudyActivity</string>
+    <string name="title_activity_study">단어학습</string>
     <string name="title_activity_study1">Study1Activity</string>
     <string name="title_activity_study2">Study2Activity</string>
     <string name="title_activity_study3">Study3Activity</string>
@@ -20,7 +20,8 @@
     <string name="title_activity_novel">영어소설 검색</string>
     <string name="title_activity_novel_view">영어소설</string>
     <string name="title_activity_my_novel">영어소설</string>
-    <string name="title_activity_novel_site">영문 소설 사이트</string>
+    <string name="title_activity_novel_site">영문 소설 무료 사이트</string>
+    <string name="title_activity_novel_site_view">영문 소설 무료 사이트</string>
 
 
     <!-- action -->

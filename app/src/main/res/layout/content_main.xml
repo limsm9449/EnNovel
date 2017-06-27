@@ -69,7 +69,7 @@
                 android:layout_marginLeft="10dp" />
 
             <Button
-                android:text="영어 소설\n사이트"
+                android:text="영어 소설\n무료 사이트"
                 android:layout_width="match_parent"
                 android:id="@+id/my_b_novel_site"
                 android:background="@drawable/my_button"

@@ -38,6 +38,8 @@ public class PatchActivity extends AppCompatActivity {
         patch.append("" + CommConstants.sqlCR);
 
         patch.append("* 패치 내역" + CommConstants.sqlCR);
+        patch.append("- 2017.06.27 : 용량이 큰 파일의 경우 페이지로 나누어서 보이도록 수정" + CommConstants.sqlCR);
+        patch.append("- 2017.06.27 : 영어 소설 다운로드 사이트 추가" + CommConstants.sqlCR);
         patch.append("- 2017.06.20 : 영어소설 어플 개발" + CommConstants.sqlCR);
 
         ((TextView) this.findViewById(R.id.my_c_patch_tv1)).setText(patch.toString());

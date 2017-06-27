@@ -112,8 +112,12 @@ public class NovelSiteActivity extends AppCompatActivity implements View.OnClick
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Cursor cur = (Cursor) adapter.getItem(position);
-            String url = "http://" + cur.getString(cur.getColumnIndexOrThrow("SITE"));;
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+
+            Bundle bundle = new Bundle();
+            bundle.putString("title", cur.getString(cur.getColumnIndexOrThrow("SITE")));
+            bundle.putString("site", "http://" + cur.getString(cur.getColumnIndexOrThrow("SITE")));
+            Intent intent = new Intent(NovelSiteActivity.this, NovelSiteViewActivity.class);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };

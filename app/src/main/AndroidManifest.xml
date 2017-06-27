@@ -50,6 +50,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".StudyActivity"
+            android:label="@string/title_activity_study"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Study1Activity"
@@ -110,6 +111,10 @@
         <activity
             android:name=".NovelSiteActivity"
             android:label="@string/title_activity_novel_site"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NovelSiteViewActivity"
+            android:label="@string/title_activity_novel_site_view"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

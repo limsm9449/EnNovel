@@ -727,7 +727,7 @@ public class DicQuery {
     public static String getMyFavoriteMessage() {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("SELECT -1 _id, -1 SEQ, '즐겨찾기 목록이 없습니다.\n영어소설 화면 리스트에서 소설을 길게 클릭하시면 즐겨찾기로 등록이 됩니다.' TITLE, '' INS_DATE" + CommConstants.sqlCR);
+        sql.append("SELECT -1 _id, -1 SEQ, '즐겨찾기 목록이 없습니다.\nMy 영어소설 화면 리스트에서 소설을 길게 클릭하시면 즐겨찾기로 등록이 됩니다.' TITLE, '' INS_DATE" + CommConstants.sqlCR);
 
         DicUtils.dicSqlLog(sql.toString());
 
