@@ -47,9 +47,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
-
-
-
     }
 
     @Override
