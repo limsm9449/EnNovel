@@ -191,11 +191,9 @@ public class DicUtils {
         FileInputStream fis = null;
         try {
             //데이타 초기화
-            DicDb.initMyConversationNote(db);
-            DicDb.initConversationNote(db);
             DicDb.initVocabulary(db);
             DicDb.initDicClickWord(db);
-            DicDb.initHistory(db);
+            DicDb.initMyNovel(db);
 
             if ( "".equals(fileName) ) {
                 fis = ctx.openFileInput(CommConstants.infoFileName);

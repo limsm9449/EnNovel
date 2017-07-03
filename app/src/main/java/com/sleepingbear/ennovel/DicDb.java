@@ -611,4 +611,11 @@ public class DicDb {
         db.execSQL(sql.toString());
     }
 
+    public static void initMyNovel(SQLiteDatabase db) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("DELETE FROM DIC_MY_NOVEL " + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
 }
