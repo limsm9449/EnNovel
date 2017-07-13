@@ -379,6 +379,7 @@ class NewsClickwordCursorAdapter extends CursorAdapter {
         ((TextView) view.findViewById(R.id.my_tv_date)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.my_tv_mean)).setTextSize(fontSize);
 
+        ((CheckBox)view.findViewById(R.id.my_cb_check)).setChecked(isCheck[cursor.getPosition()]);
         if ( isCheck[cursor.getPosition()] ) {
             ((CheckBox)view.findViewById(R.id.my_cb_check)).setButtonDrawable(android.R.drawable.checkbox_on_background);
         } else {
