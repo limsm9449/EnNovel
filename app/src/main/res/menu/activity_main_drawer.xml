@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_novel_site"
+            android:title="영어소설 무료 사이트" />
+        <item
+            android:id="@+id/nav_novel_word"
+            android:title="영어소설 클릭 단어" />
+        <item
+            android:id="@+id/nav_voc"
+            android:title="단어장" />
+        <item
+            android:id="@+id/nav_study"
+            android:title="단어학습" />
+        <item
+            android:id="@+id/nav_patch"
+            android:title="패치내역" />
+        <item
+            android:id="@+id/nav_help"
+            android:title="도움말" />
+        <item
+            android:id="@+id/nav_setting"
+            android:title="환경설정" />
+    </group>
+
+    <item android:title="기타">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:title="어플 공유" />
+            <item
+                android:id="@+id/nav_review"
+                android:title="어플 리뷰" />
+            <item
+                android:id="@+id/nav_other_app"
+                android:title="다른 어플들.." />
+            <item
+                android:id="@+id/nav_mail"
+                android:title="개발자에게 메일 보내기" />
+        </menu>
+    </item>
+
+</menu>

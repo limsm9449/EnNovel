@@ -11,124 +11,60 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/my_ll_b"
-        android:layout_alignParentTop="true">
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id="@+id/my_my_novel_rl"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_done_all_black_24dp"
+                android:id="@+id/my_f_cw_all"
+                android:layout_marginLeft="10dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_delete_black_24dp"
+                android:id="@+id/my_f_cw_delete"
+                android:layout_marginLeft="15dp"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/my_divider"
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/my_lv" />
+            android:id="@+id/my_my_novel_ll"
+            android:layout_below="@+id/my_my_novel_rl"></LinearLayout>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/my_lv"
             android:divider="@color/my_divider"
-            android:dividerHeight="0.5dp" />
+            android:dividerHeight="0.5dp"
+            android:layout_below="@+id/my_my_novel_ll"
+            android:layout_above="@+id/adView" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/my_divider"
-            android:layout_alignParentTop="true"
-            android:layout_below="@+id/my_lv" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/adView"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/my_ll_b"
-        android:layout_marginTop="5dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:text="My\n영어 소설"
-                android:layout_width="match_parent"
-                android:id="@+id/my_b_novel"
-                android:background="@drawable/my_button"
-                android:layout_weight="1"
-                android:layout_marginRight="2dp"
-                android:textSize="16sp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp" />
-
-            <Button
-                android:text="영어 소설\n무료 사이트"
-                android:layout_width="match_parent"
-                android:id="@+id/my_b_novel_site"
-                android:background="@drawable/my_button"
-                android:layout_weight="1"
-                android:layout_marginRight="2dp"
-                android:textSize="16sp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="3dp" />
-
-            <Button
-                android:text="영문 소설\n클릭 단어"
-                android:layout_width="match_parent"
-                android:id="@+id/my_b_news_word"
-                android:background="@drawable/my_button"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:textSize="16sp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
-            <Button
-                android:text="단어장"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:id="@+id/my_b_voc"
-                android:background="@drawable/my_button"
-                android:layout_marginRight="2dp"
-                android:textSize="16sp"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp" />
-
-            <Button
-                android:text="단어 학습"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:id="@+id/my_b_voc_study"
-                android:background="@drawable/my_button"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp"
-                android:textSize="16sp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"
-        android:layout_alignParentBottom="true" />
 </RelativeLayout>

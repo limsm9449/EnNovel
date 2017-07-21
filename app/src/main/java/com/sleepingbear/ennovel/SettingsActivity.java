@@ -154,20 +154,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         }
                     })
                     .show();
-        } else if ( preference.getKey().equals("key_mail") ) {
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
-            intent.putExtra(Intent.EXTRA_TEXT, "어플관련 문제점을 적어 주세요.\n빠른 시간 안에 수정을 하겠습니다.\n감사합니다.");
-            intent.setData(Uri.parse("mailto:limsm9449@gmail.com"));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } else if ( preference.getKey().equals("key_review") ) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
-        } else if ( preference.getKey().equals("key_apps") ) {
-            String url ="http://blog.naver.com/limsm9449/221031416154";
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
         }
 
         return false;

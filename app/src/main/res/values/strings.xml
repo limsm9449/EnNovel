@@ -45,4 +45,7 @@
 
     <!-- My -->
     <string name="banner_ad_unit_id">ca-app-pub-3860766380986792/4804458269</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="#ffffff"
     android:paddingLeft="10dp"
     android:paddingTop="8dp"
     android:paddingRight="5dp"
-    android:paddingBottom="8dp"
-    android:descendantFocusability="blocksDescendants">
+    android:paddingBottom="8dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/my_f_ci_rl">
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:id="@+id/my_dictionary_ll"
+        android:layout_centerVertical="true">
 
-        <RelativeLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/my_f_ci_ll"
-            android:layout_alignParentTop="true">
+            android:text="New Text"
+            android:id="@+id/my_tv_foreign"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/my_text_word"
+            android:textSize="15dp"
+            android:gravity="left" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:id="@+id/my_tv_title"
-                android:layout_alignParentTop="false"
-                android:layout_alignParentLeft="true"
-                android:textColor="@color/my_text_word"
-                android:textSize="15dp"
-                android:textStyle="normal|bold"
-                android:layout_toLeftOf="@+id/my_tv_date" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_tv_spelling"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:textSize="13dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:id="@+id/my_tv_date"
-                android:textSize="11dp"
-                android:layout_marginLeft="10dp"
-                android:layout_alignParentRight="true"
-                android:textColor="#FF9E9C9C"
-                android:layout_marginRight="10dp"
-                android:layout_centerVertical="true" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="New Text"
+        android:id="@+id/my_tv_mean"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="true"
+        android:textColor="#4f8ead"
+        android:textSize="14dp"
+        android:layout_alignParentLeft="false"
+        android:layout_below="@+id/my_dictionary_ll"
+        android:layout_marginTop="5dp" />
 
 </RelativeLayout>

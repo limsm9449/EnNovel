@@ -29,15 +29,8 @@ public class PatchActivity extends AppCompatActivity {
 
         StringBuffer patch = new StringBuffer();
 
-        patch.append("* 영어 공부에 도움이 될만한 기능을 모아서 어플을 개발하게 되었습니다." + CommConstants.sqlCR);
-        patch.append("사용하시다가 문제점이나 개선사항이 있으면 메일을 보내주세요." + CommConstants.sqlCR);
-        patch.append("개발에 참고하겠습니다." + CommConstants.sqlCR);
-        patch.append("영어 공부에 많은 도움이 되었으면 합니다." + CommConstants.sqlCR);
-        patch.append("" + CommConstants.sqlCR);
-        patch.append("" + CommConstants.sqlCR);
-        patch.append("" + CommConstants.sqlCR);
-
         patch.append("* 패치 내역" + CommConstants.sqlCR);
+        patch.append("- UI 변경" + CommConstants.sqlCR);
         patch.append("- 데이타 복구시 이전 데이타를 초기화 하도록 수정" + CommConstants.sqlCR);
         patch.append("- 용량이 큰 파일의 경우 페이지로 나누어서 보이도록 수정" + CommConstants.sqlCR);
         patch.append("- 영어 소설 다운로드 사이트 추가" + CommConstants.sqlCR);
