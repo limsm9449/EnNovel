@@ -220,6 +220,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private long backKeyPressedTime = 0;
     @Override
     public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+            //} else {
+            //    super.onBackPressed();
+        }
         //종료 시점에 변경 사항을 기록한다.
         if ( "Y".equals(DicUtils.getDbChange(getApplicationContext())) ) {
             DicUtils.writeInfoToFile(this, db, "");
@@ -228,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            Toast.makeText(MainActivity.this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
 
             return;
         }
@@ -320,9 +326,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == android.R.id.home) {
-            onBackPressed();
-        } else if (id == R.id.action_edit) {
+        if (id == R.id.action_edit) {
             isEditing = true;
             invalidateOptionsMenu();
             changeEdit(isEditing);
@@ -330,13 +334,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             isEditing = false;
             invalidateOptionsMenu();
             changeEdit(isEditing);
-        } else if (id == R.id.action_help) {
-            Bundle bundle = new Bundle();
-            bundle.putString("SCREEN", CommConstants.screen_my_novel);
-
-            Intent intent = new Intent(getApplication(), HelpActivity.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

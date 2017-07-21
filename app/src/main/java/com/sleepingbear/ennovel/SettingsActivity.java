@@ -29,6 +29,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private PreferenceScreen screen;
     private ListPreference mFontSize;
     private ListPreference mWebViewFontSize;
+    private ListPreference mWordView;
 
 
 
@@ -44,6 +45,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         mWebViewFontSize = (ListPreference) screen.findPreference("key_webViewFontSize");
         mWebViewFontSize.setOnPreferenceChangeListener(this);
+
+        mWordView = (ListPreference) screen.findPreference("key_wordView");
+        mWordView.setOnPreferenceChangeListener(this);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -172,6 +176,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             ListPreference listPreference = (ListPreference) preference;
             int index = listPreference.findIndexOfValue(value);
             mWebViewFontSize.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
+        } else if ( preference == mWordView ) {
+            ListPreference listPreference = (ListPreference) preference;
+            int index = listPreference.findIndexOfValue(value);
+            mWordView.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
         }
         return true;
     }
@@ -180,5 +188,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void updateSummary(){
         mFontSize.setSummary(mFontSize.getEntry());
         mWebViewFontSize.setSummary(mWebViewFontSize.getEntry());
+        mWordView.setSummary(mWordView.getEntry());
     }
 }
