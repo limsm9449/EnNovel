@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private boolean isEditing;
     private boolean isChange = false;
+    private boolean isNoData = true;
 
     private static final int MY_PERMISSIONS_REQUEST = 0;
 
@@ -313,10 +314,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menu.findItem(R.id.action_edit).setVisible(false);
         menu.findItem(R.id.action_exit).setVisible(false);
 
-        if ( isEditing ) {
-            menu.findItem(R.id.action_exit).setVisible(true);
-        } else {
-            menu.findItem(R.id.action_edit).setVisible(true);
+        if ( !isNoData ) {
+            if (isEditing) {
+                menu.findItem(R.id.action_exit).setVisible(true);
+            } else {
+                menu.findItem(R.id.action_edit).setVisible(true);
+            }
         }
 
         return super.onPrepareOptionsMenu(menu);
@@ -365,10 +368,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if ( db != null ) {
             Cursor listCursor = db.rawQuery(DicQuery.getMyNovel(), null);
             if ( listCursor.getCount() == 0 ) {
+                isNoData = true;
                 listCursor = db.rawQuery(DicQuery.getMyNovelMessage(), null);
                 changeEdit(false);
                 invalidateOptionsMenu();
+            } else {
+                isNoData = false;
+                invalidateOptionsMenu();
             }
+
             ListView listView = (ListView) findViewById(R.id.my_lv);
             adapter = new MainCursorAdapter(this, listCursor, db, 0);
             adapter.editChange(isEditing);
