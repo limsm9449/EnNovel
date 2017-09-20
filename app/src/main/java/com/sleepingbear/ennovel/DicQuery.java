@@ -420,7 +420,15 @@ public class DicQuery {
         sql.append("SELECT 1 _id, CODE KIND, CODE_NAME KIND_NAME," + CommConstants.sqlCR);
         sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
         sql.append("                        FROM DIC_VOC" + CommConstants.sqlCR);
-        sql.append("                       WHERE KIND = A.CODE),0) CNT" + CommConstants.sqlCR);
+        sql.append("                       WHERE KIND = A.CODE),0) CNT," + CommConstants.sqlCR);
+        sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
+        sql.append("                        FROM DIC_VOC" + CommConstants.sqlCR);
+        sql.append("                       WHERE KIND = A.CODE" + CommConstants.sqlCR);
+        sql.append("                         AND MEMORIZATION = 'Y'),0) M_CNT," + CommConstants.sqlCR);
+        sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
+        sql.append("                        FROM DIC_VOC" + CommConstants.sqlCR);
+        sql.append("                       WHERE KIND = A.CODE" + CommConstants.sqlCR);
+        sql.append("                         AND MEMORIZATION = 'N'),0) UM_CNT" + CommConstants.sqlCR);
         sql.append("  FROM DIC_CODE A" + CommConstants.sqlCR);
         sql.append(" WHERE CODE_GROUP = '" + CommConstants.vocabularyCode + "'" + CommConstants.sqlCR);
         sql.append(" ORDER BY 1,3" + CommConstants.sqlCR);

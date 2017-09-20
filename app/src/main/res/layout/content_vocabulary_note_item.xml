@@ -12,11 +12,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/my_ib_next"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/my_tv_pattern"
                 android:layout_alignParentTop="true"
@@ -32,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/my_tv_cnt"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentBottom="false"
                 android:layout_alignParentRight="false"
                 android:layout_alignParentEnd="false"
                 android:textColor="#4f8ead"

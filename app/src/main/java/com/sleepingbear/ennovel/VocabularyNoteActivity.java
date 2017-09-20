@@ -403,7 +403,9 @@ class VocabularyNoteCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ((TextView) view.findViewById(R.id.my_tv_pattern)).setText(cursor.getString(cursor.getColumnIndexOrThrow("KIND_NAME")));
-        ((TextView) view.findViewById(R.id.my_tv_cnt)).setText(String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("CNT"))));
+        ((TextView) view.findViewById(R.id.my_tv_cnt)).setText(String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("CNT"))) +
+                " ( 암기 : " + String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("M_CNT"))) + ", " +
+                " 미암기 : " + String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("UM_CNT"))) + " )");
 
         //사이즈 설정
         ((TextView) view.findViewById(R.id.my_tv_pattern)).setTextSize(fontSize);
