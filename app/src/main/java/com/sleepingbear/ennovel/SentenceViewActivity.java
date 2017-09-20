@@ -156,7 +156,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
                 }
                 cursor.close();
 
-                final AlertDialog.Builder dlg = new AlertDialog.Builder(SentenceViewActivity.this);
+                final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(SentenceViewActivity.this);
                 dlg.setTitle("단어장 선택");
                 dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
                     @Override

@@ -195,7 +195,7 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
             if ( !adapter.isCheck() ) {
                 Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
             } else {
-                new android.app.AlertDialog.Builder(this)
+                new android.support.v7.app.AlertDialog.Builder(this)
                         .setTitle("알림")
                         .setMessage("삭제하시겠습니까?")
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {

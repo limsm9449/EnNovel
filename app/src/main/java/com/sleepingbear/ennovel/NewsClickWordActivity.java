@@ -177,7 +177,7 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
                 if ( !adapter.isCheck() ) {
                     Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    new android.app.AlertDialog.Builder(this)
+                    new android.support.v7.app.AlertDialog.Builder(this)
                             .setTitle("알림")
                             .setMessage("삭제하시겠습니까?")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -262,7 +262,7 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
                     }
                     cursor.close();
 
-                    final AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+                    final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(this);
                     dlg.setTitle("단어장 선택");
                     dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
                         @Override

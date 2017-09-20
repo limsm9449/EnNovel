@@ -72,9 +72,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             final View dialog_layout = li.inflate(R.layout.dialog_backup, null);
 
             //dialog 생성..
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
             builder.setView(dialog_layout);
-            final AlertDialog alertDialog = builder.create();
+            final android.support.v7.app.AlertDialog alertDialog = builder.create();
 
             final EditText et_saveName = ((EditText) dialog_layout.findViewById(R.id.my_d_dm_et_save));
             et_saveName.setText("backup_" + DicUtils.getCurrentDate() + ".txt");
@@ -142,7 +142,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             filechooser.setExtension("txt");
             filechooser.showDialog();
         } else if ( preference.getKey().equals("key_voc_clear") ) {
-            new AlertDialog.Builder(this)
+            new android.support.v7.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("단어장을 초기화 하시겠습니까?\n초기화 후에는 복구할 수 없습니다.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {

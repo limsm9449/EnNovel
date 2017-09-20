@@ -291,7 +291,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
             }
             cursor.close();
 
-            final AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+            final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(this);
             dlg.setTitle("메뉴 선택");
             dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
                 @Override
@@ -329,7 +329,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
     public void wordSearch() {
         final String[] kindCodes = new String[]{"Naver","Daum"};
 
-        final AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+        final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(this);
         dlg.setTitle("검색 사이트 선택");
         dlg.setSingleChoiceItems(kindCodes, m2Select, new DialogInterface.OnClickListener() {
             @Override
@@ -566,7 +566,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
                     } else if ( "TRANSLATE".equals(kind) ) {
                         final String[] kindCodes = new String[]{"Naver","Google"};
 
-                        final AlertDialog.Builder dlg = new AlertDialog.Builder(NovelViewActivity.this);
+                        final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(NovelViewActivity.this);
                         dlg.setTitle("번역 사이트 선택");
                         dlg.setSingleChoiceItems(kindCodes, m2Select, new DialogInterface.OnClickListener() {
                             @Override

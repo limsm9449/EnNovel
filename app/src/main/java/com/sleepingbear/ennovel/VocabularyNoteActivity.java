@@ -58,9 +58,9 @@ public class VocabularyNoteActivity extends AppCompatActivity implements View.On
                 final View dialog_layout = inflater.inflate(R.layout.dialog_category_add, null);
 
                 //dialog 생성..
-                AlertDialog.Builder builder = new AlertDialog.Builder(VocabularyNoteActivity.this);
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(VocabularyNoteActivity.this);
                 builder.setView(dialog_layout);
-                final AlertDialog alertDialog = builder.create();
+                final android.support.v7.app.AlertDialog alertDialog = builder.create();
 
                 ((TextView) dialog_layout.findViewById(R.id.my_d_category_add_tv_title)).setText("단어장 추가");
                 final EditText et_ins = ((EditText) dialog_layout.findViewById(R.id.my_d_category_add_et_ins));

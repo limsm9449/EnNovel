@@ -118,7 +118,7 @@ public class Study1Activity extends AppCompatActivity implements View.OnClickLis
 
         Cursor cursor = db.rawQuery(sql.toString(), null);
         if ( cursor.getCount() == 0 ) {
-            new android.app.AlertDialog.Builder(this)
+            new android.support.v7.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("데이타가 없습니다.\n암기 여부, 일자 조건을 조정해 주세요.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -267,7 +267,7 @@ class Study1CursorAdapter extends CursorAdapter {
             public boolean onLongClick(final View v) {
                 ViewHolder viewHolder = (ViewHolder) v.getTag();
 
-                final AlertDialog.Builder dlg = new AlertDialog.Builder(mActivity);
+                final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(mActivity);
                 dlg.setTitle("메뉴 선택");
                 dlg.setSingleChoiceItems(new String[]{"단어 보기", "전체 정답 보기"}, mSelect, new DialogInterface.OnClickListener() {
                     @Override

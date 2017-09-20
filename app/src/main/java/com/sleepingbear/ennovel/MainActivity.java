@@ -395,12 +395,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 Bundle bundle = new Bundle();
 
-                bundle.putString("novelTitle", cur.getString(cur.getColumnIndexOrThrow("TITLE")));
-                bundle.putString("path", cur.getString(cur.getColumnIndexOrThrow("PATH")));
+                if ( cur.getInt(cur.getColumnIndexOrThrow("SEQ")) > -1 ) {
+                    bundle.putString("novelTitle", cur.getString(cur.getColumnIndexOrThrow("TITLE")));
+                    bundle.putString("path", cur.getString(cur.getColumnIndexOrThrow("PATH")));
 
-                Intent intent = new Intent(MainActivity.this, NovelViewActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, NovelViewActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         }
     };
@@ -417,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if ( !adapter.isCheck() ) {
                     Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    new android.app.AlertDialog.Builder(this)
+                    new android.support.v7.app.AlertDialog.Builder(this)
                             .setTitle("알림")
                             .setMessage("삭제하시겠습니까?")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {

@@ -310,7 +310,7 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
             tv_spelling.setText("");
             tv_answer.setText("");*/
 
-            new android.app.AlertDialog.Builder(this)
+            new android.support.v7.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("데이타가 없습니다.\n암기 여부, 일자 조건을 조정해 주세요.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {

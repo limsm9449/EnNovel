@@ -684,6 +684,7 @@ public class DicQuery {
         sql.append("SELECT  SEQ _id, TITLE, URL" + CommConstants.sqlCR);
         sql.append("FROM    DIC_NOVEL" + CommConstants.sqlCR);
         sql.append("WHERE   KIND = '" + kind + "'" + CommConstants.sqlCR);
+        sql.append("ORDER   BY TITLE" + CommConstants.sqlCR);
         DicUtils.dicSqlLog(sql.toString());
 
         return sql.toString();

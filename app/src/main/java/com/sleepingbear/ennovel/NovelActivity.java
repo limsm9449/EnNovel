@@ -161,7 +161,7 @@ public class NovelActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final int pos = position;
-            new AlertDialog.Builder(NovelActivity.this)
+            new android.support.v7.app.AlertDialog.Builder(NovelActivity.this)
                 .setTitle("알림")
                 .setMessage("영문소설을 다운로드 하시겠습니까?")
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {

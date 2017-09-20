@@ -246,7 +246,7 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
             if ( cur.getInt(cur.getColumnIndexOrThrow("SEQ") )!= -1 ) {
                 final String seq = cur.getString(cur.getColumnIndexOrThrow("SEQ"));
 
-                new AlertDialog.Builder(MyNovelActivity.this)
+                new android.support.v7.app.AlertDialog.Builder(MyNovelActivity.this)
                         .setTitle("알림")
                         .setMessage("메인화면 리스트에 나오도록 즐겨찾기로 등록하시겠습니까?")
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -281,7 +281,7 @@ public class MyNovelActivity extends AppCompatActivity implements View.OnClickLi
                 if ( !adapter.isCheck() ) {
                     Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    new android.app.AlertDialog.Builder(this)
+                    new android.support.v7.app.AlertDialog.Builder(this)
                             .setTitle("알림")
                             .setMessage("삭제하시겠습니까?")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
