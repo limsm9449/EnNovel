@@ -155,9 +155,7 @@ public class NovelViewActivity extends AppCompatActivity implements View.OnClick
         //페이지 설정
         initPage();
 
-        AdView av = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new  AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
     public void initPage() {

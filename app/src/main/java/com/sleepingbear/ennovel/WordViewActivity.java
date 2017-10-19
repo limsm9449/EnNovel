@@ -79,9 +79,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
 
         webDictionaryLoad();
 
-        AdView av =(AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new  AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
     public void getWordInfo() {

@@ -125,16 +125,63 @@
                         android:textColor="@color/my_white" />
                 </RadioGroup>
 
-                <Button
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Random"
-                    android:id="@+id/my_a_study5_b_random"
-                    android:layout_alignParentTop="false"
-                    android:background="@drawable/my_button"
-                    android:layout_alignParentRight="true"
+                    android:checkedButton="@+id/my_rb_sort_asc"
+                    android:id="@+id/my_rg_sort"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="@android:color/white" />
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/my_toggle_outline"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/my_a_study5_rg2">
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Asc"
+                        android:id="@+id/my_rb_sort_asc"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="1"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white"
+                        android:layout_marginLeft="1dp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Desc"
+                        android:id="@+id/my_rb_sort_desc"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="1"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Random"
+                        android:id="@+id/my_rb_sort_random"
+                        android:background="@drawable/my_toggle_bg"
+                        android:layout_weight="2"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textColor="@color/my_white" />
+                </RadioGroup>
             </RelativeLayout>
         </RelativeLayout>
 

@@ -67,4 +67,6 @@ public class CommConstants {
 
         public final static int a_MyNovel = 1;
         public final static int a_setting = 2;
+
+        public static boolean isFreeApp = true;
     }

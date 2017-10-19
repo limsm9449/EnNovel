@@ -1,6 +1,5 @@
 package com.sleepingbear.ennovel;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -18,9 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
@@ -104,9 +101,7 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
         Button b_start = (Button) findViewById(R.id.my_f_stu_b_start);
         b_start.setOnClickListener(this);
 
-        AdView av = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new  AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
 
@@ -143,7 +138,7 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
             Cursor cursor = db.rawQuery(DicQuery.getVocabularyCount(mVocKind), null);
             if ( cursor.moveToNext() ) {
                 if ( cursor.getInt(cursor.getColumnIndexOrThrow("CNT")) == 0 ) {
-                    new android.support.v7.app.AlertDialog.Builder(this)
+                    new AlertDialog.Builder(this)
                             .setTitle("알림")
                             .setMessage("단어장에 등록된 단어가 없습니다.")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {

@@ -20,15 +20,13 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Study5Activity extends AppCompatActivity implements View.OnClickListener {
     private String mVocKind;
     private String mMemorization;
+    private String mSort = "QUESTION ASC";
 
     private String mWordMean;
 
@@ -82,7 +80,9 @@ public class Study5Activity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.my_a_study5_rb_m_not).setOnClickListener(this);
         findViewById(R.id.my_a_study5_rb_word).setOnClickListener(this);
         findViewById(R.id.my_a_study5_rb_mean).setOnClickListener(this);
-        findViewById(R.id.my_a_study5_b_random).setOnClickListener(this);
+        findViewById(R.id.my_rb_sort_asc).setOnClickListener(this);
+        findViewById(R.id.my_rb_sort_desc).setOnClickListener(this);
+        findViewById(R.id.my_rb_sort_random).setOnClickListener(this);
         findViewById(R.id.my_a_study5_b_a1).setOnClickListener(this);
         findViewById(R.id.my_a_study5_b_a2).setOnClickListener(this);
         findViewById(R.id.my_a_study5_b_a3).setOnClickListener(this);
@@ -155,9 +155,7 @@ public class Study5Activity extends AppCompatActivity implements View.OnClickLis
 
         getListView();
 
-        AdView av = (AdView)this.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
     public void getListView() {
@@ -181,7 +179,7 @@ public class Study5Activity extends AppCompatActivity implements View.OnClickLis
         if (mMemorization.length() == 1) {
             sql.append("   AND A.MEMORIZATION = '" + mMemorization + "' " + CommConstants.sqlCR);
         }
-        sql.append(" ORDER BY A.RANDOM_SEQ" + CommConstants.sqlCR);
+        sql.append(" ORDER BY " + mSort + CommConstants.sqlCR);
         mCursor = db.rawQuery(sql.toString(), null);
         if ( mCursor.getCount() > 0 ) {
             //OX 답 데이타
@@ -242,7 +240,7 @@ public class Study5Activity extends AppCompatActivity implements View.OnClickLis
             tv_ox.setText("");
             tv_orgAnswer.setText("");*/
 
-            new android.support.v7.app.AlertDialog.Builder(this)
+            new android.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("데이타가 없습니다.\n암기 여부, 일자 조건을 조정해 주세요.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -293,9 +291,15 @@ public class Study5Activity extends AppCompatActivity implements View.OnClickLis
             mWordMean = "MEAN";
             tv_spelling.setVisibility(View.GONE);
             getListView();
-        } else if (v.getId() == R.id.my_a_study5_b_random) {
+        } else if (v.getId() == R.id.my_rb_sort_asc) {
+            mSort = "QUESTION ASC";
+            getListView();
+        } else if (v.getId() == R.id.my_rb_sort_desc) {
+            mSort = "QUESTION DESC";
+            getListView();
+        } else if (v.getId() == R.id.my_rb_sort_random) {
+            mSort = "RANDOM_SEQ";
             db.execSQL(DicQuery.updVocRandom());
-
             getListView();
         } else if (v.getId() == R.id.my_a_study5_b_a1 || v.getId() == R.id.my_a_study5_b_a2 || v.getId() == R.id.my_a_study5_b_a3 || v.getId() == R.id.my_a_study5_b_a4) {
             if ( mCursor.getCount() == 0 ) {

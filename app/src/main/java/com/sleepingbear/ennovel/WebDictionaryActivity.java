@@ -67,9 +67,7 @@ public class WebDictionaryActivity extends AppCompatActivity {
 
         webDictionaryLoad();
 
-        AdView av = (AdView)this.findViewById(R.id.adView);
-        AdRequest adRequest = new  AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
     public void webDictionaryLoad() {

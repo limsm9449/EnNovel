@@ -76,9 +76,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
         ImageButton ib_tts = (ImageButton) findViewById(R.id.my_ib_tts);
         ib_tts.setOnClickListener(this);
 
-        AdView av = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
     public void changeListView() {

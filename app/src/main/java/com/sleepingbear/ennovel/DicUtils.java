@@ -9,6 +9,10 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -892,4 +896,13 @@ public class DicUtils {
         return pageCount;
     }
 
+    public static void setAdView(AppCompatActivity app) {
+        AdView av = (AdView)app.findViewById(R.id.adView);
+        if ( CommConstants.isFreeApp ) {
+            AdRequest adRequest = new  AdRequest.Builder().build();
+            av.loadAd(adRequest);
+        } else {
+            av.setVisibility(View.GONE);
+        }
+    }
 }

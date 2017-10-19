@@ -30,25 +30,23 @@
         android:layout_marginTop="10dp">
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/my_d_category_add_et_ins"
+            android:background="@drawable/my_edittext"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/my_d_category_add_b_ins"
-            android:layout_marginLeft="10dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="추가"
-            android:id="@+id/my_d_category_add_b_ins"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/my_button"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_height="50dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"  />
+
+
     </RelativeLayout>
 
     <LinearLayout
@@ -60,17 +58,37 @@
         android:id="@+id/linearLayout5"
         android:layout_marginTop="10dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="닫기"
-        android:id="@+id/my_d_category_add_b_close"
-        android:layout_gravity="right"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-        android:background="@drawable/my_button"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="닫기"
+            android:id="@+id/my_d_category_add_b_close"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="false"
+            android:layout_centerInParent="false"
+            android:background="@drawable/my_button"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toLeftOf="@+id/my_d_category_add_b_ins" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="추가"
+            android:id="@+id/my_d_category_add_b_ins"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/my_button"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
 
 </LinearLayout>
