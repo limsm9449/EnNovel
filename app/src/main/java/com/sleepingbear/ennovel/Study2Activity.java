@@ -117,13 +117,12 @@ public class Study2Activity extends AppCompatActivity implements View.OnClickLis
         sql.append(" ORDER BY " + mSort + CommConstants.sqlCR);
         Cursor cursor = db.rawQuery(sql.toString(), null);
         if ( cursor.getCount() == 0 ) {
-            new android.app.AlertDialog.Builder(this)
+            new AlertDialog.Builder(this)
                     .setTitle("알림")
-                    .setMessage("데이타가 없습니다.\n암기 여부, 일자 조건을 조정해 주세요.")
+                    .setMessage("데이타가 없습니다.\n암기 여부를 조정해 주세요.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
                         }
                     })
                     .show();
@@ -190,7 +189,7 @@ public class Study2Activity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.my_a_study3_rb_all) {
+        if (v.getId() == R.id.my_a_study2_rb_all) {
             mMemorization = "";
             getListView();
         } else if (v.getId() == R.id.my_a_study2_rb_m) {

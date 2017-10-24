@@ -17,6 +17,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -284,13 +285,12 @@ public class Study6Activity extends AppCompatActivity implements View.OnClickLis
             tv_ox.setText("");
             tv_orgAnswer.setText("");*/
 
-            new android.app.AlertDialog.Builder(this)
+            new AlertDialog.Builder(this)
                     .setTitle("알림")
-                    .setMessage("데이타가 없습니다.\n암기 여부, 일자 조건을 조정해 주세요.")
+                    .setMessage("데이타가 없습니다.\n암기 여부를 조정해 주세요.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
                         }
                     })
                     .show();
