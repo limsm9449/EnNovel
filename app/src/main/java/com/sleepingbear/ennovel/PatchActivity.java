@@ -31,6 +31,10 @@ public class PatchActivity extends AppCompatActivity {
 
         patch.append("* 패치 내역" + CommConstants.sqlCR);
         patch.append("- Android 7에서 Dialog의 버튼의 글씨가 안나오는 문제점 수정" + CommConstants.sqlCR);
+        patch.append("- 다이얼로그 디자인 변경" + CommConstants.sqlCR);
+
+        patch.append(CommConstants.sqlCR);
+        patch.append(CommConstants.sqlCR);
         patch.append("- UI 변경" + CommConstants.sqlCR);
         patch.append("- 데이타 복구시 이전 데이타를 초기화 하도록 수정" + CommConstants.sqlCR);
         patch.append("- 용량이 큰 파일의 경우 페이지로 나누어서 보이도록 수정" + CommConstants.sqlCR);

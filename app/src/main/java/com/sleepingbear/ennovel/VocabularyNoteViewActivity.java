@@ -358,6 +358,12 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
             ttsIntent.putExtra("words", words);
             ttsIntent.putExtra("means", means);
             startService(ttsIntent);
+        } else if (id == R.id.action_all_memory) {
+            DicDb.updVocabularyAllMemory(db, kind);
+            getListView();
+        } else if (id == R.id.action_all_unmemory) {
+            DicDb.updVocabularyAllUnmemory(db, kind);
+            getListView();
         } else if (id == R.id.action_help) {
             Bundle bundle = new Bundle();
             bundle.putString("SCREEN", CommConstants.screen_vocabularyNoteView);
